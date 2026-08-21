@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Zap, Radar, ShieldCheck, MapPin } from "lucide-react";
+import { Radar } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
 import { SmartHero } from "@/components/home/SmartHero";
 import { HubGrid } from "@/components/home/HubGrid";
@@ -20,13 +20,7 @@ import { Reveal } from "@/components/home/Reveal";
 import { Testimonials } from "@/components/home/Testimonials";
 import { track, useScrollDepth, useSectionTime } from "@/lib/analytics";
 import { useEffect } from "react";
-
-const HOME_LIVE = [
-  { icon: <Zap className="h-3 w-3" />, text: "Marc vient de publier un flash livraison" },
-  { icon: <Radar className="h-3 w-3" />, text: "3 besoins urgents à Akwa" },
-  { icon: <ShieldCheck className="h-3 w-3" />, text: "Léa a vérifié son profil" },
-  { icon: <MapPin className="h-3 w-3" />, text: "Nouveau lieu repéré à Bonapriso" },
-];
+import { HOME_LIVE } from "@/features/home/data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
