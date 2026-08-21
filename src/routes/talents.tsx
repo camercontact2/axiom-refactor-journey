@@ -5,7 +5,6 @@ import { PageBreadcrumb } from "@/components/ui-kit/PageBreadcrumb";
 import { LivePulse } from "@/components/ui-kit/LivePulse";
 import { GraduationCap } from "lucide-react";
 import { ACCENT, LIVE_ITEMS } from "@/features/talents/data";
-import { ACCENT, LIVE_ITEMS } from "@/features/talents/data";
 import { HeroSection } from "@/features/talents/sections/HeroSection";
 import { PillarsSection } from "@/features/talents/sections/PillarsSection";
 import { CategoriesSection } from "@/features/talents/sections/CategoriesSection";

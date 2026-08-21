@@ -3,7 +3,6 @@ import { TrustBadge } from "@/components/ui-kit/TrustBadge";
 import { BadgeCheck } from "lucide-react";
 import { ScoreBar } from "@/features/trust/components/ScoreBar";
 import { PROFILE, SCORES } from "../data";
-import { ScoreBar } from "../components/ScoreBar";
 
 export function TrustHeroSection() {
   return (

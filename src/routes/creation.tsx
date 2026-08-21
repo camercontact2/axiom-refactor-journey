@@ -5,7 +5,6 @@ import { PageBreadcrumb } from "@/components/ui-kit/PageBreadcrumb";
 import { LivePulse } from "@/components/ui-kit/LivePulse";
 import { Palette } from "lucide-react";
 import { ACCENT, LIVE_ITEMS } from "@/features/creation/data";
-import { ACCENT, LIVE_ITEMS } from "@/features/creation/data";
 import { HeroSection } from "@/features/creation/sections/HeroSection";
 import { StudiosSection } from "@/features/creation/sections/StudiosSection";
 import { StepsSection } from "@/features/creation/sections/StepsSection";
