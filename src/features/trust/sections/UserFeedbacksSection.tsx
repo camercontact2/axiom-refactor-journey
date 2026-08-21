@@ -3,7 +3,7 @@ import { BadgeCheck } from "lucide-react";
 import { FEEDBACKS } from "@/features/trust/data";
 import { FEEDBACKS } from "../data";
 
-export function 4UserFeedbacksSection() {
+export function UserFeedbacksSection() {
   return (
     <section className="space-y-3">
       <div className="flex items-center justify-between px-1">

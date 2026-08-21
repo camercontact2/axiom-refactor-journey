@@ -2,7 +2,7 @@ import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { TIMELINE } from "@/features/trust/data";
 import { TIMELINE } from "../data";
 
-export function 6ActivityTimelineSection() {
+export function ActivityTimelineSection() {
   return (
     <section className="space-y-3">
       <h3 className="px-1 text-sm font-medium text-muted-foreground">Activité récente</h3>

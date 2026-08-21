@@ -2,7 +2,7 @@ import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { BADGES, VERIFICATIONS } from "@/features/trust/data";
 import { VERIFICATIONS, BADGES } from "../data";
 
-export function 2VerificationStatusSection() {
+export function VerificationStatusSection() {
   return (
     <section className="space-y-3">
       <h3 className="px-1 text-sm font-medium text-muted-foreground">

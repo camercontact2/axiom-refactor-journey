@@ -3,7 +3,7 @@ import { Calendar } from "lucide-react";
 import { TRANSPARENCY } from "@/features/trust/data";
 import { TRANSPARENCY } from "../data";
 
-export function 8TransparencyInfoPanelSection() {
+export function TransparencyInfoPanelSection() {
   return (
     <section className="space-y-3">
       <h3 className="px-1 text-sm font-medium text-muted-foreground">Informations</h3>

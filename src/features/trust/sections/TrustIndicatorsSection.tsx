@@ -2,7 +2,7 @@ import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { INDICATORS } from "@/features/trust/data";
 import { INDICATORS } from "../data";
 
-export function 3TrustIndicatorsSection() {
+export function TrustIndicatorsSection() {
   return (
     <section className="space-y-3">
       <h3 className="px-1 text-sm font-medium text-muted-foreground">Indicateurs</h3>

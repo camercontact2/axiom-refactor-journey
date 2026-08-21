@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Bookmark, MessageCircle, Share2, ShieldCheck } from "lucide-react";
 
-export function 9TrustActionButtonsSection() {
+export function TrustActionButtonsSection() {
   return (
     <section className="sticky bottom-24 z-10 grid grid-cols-2 gap-2">
       <Button

@@ -3,7 +3,7 @@ import { BadgeCheck } from "lucide-react";
 import { PROOFS } from "@/features/trust/data";
 import { PROOFS } from "../data";
 
-export function 5ProofsTransparencySection() {
+export function ProofsTransparencySection() {
   return (
     <section className="space-y-3">
       <h3 className="px-1 text-sm font-medium text-muted-foreground">

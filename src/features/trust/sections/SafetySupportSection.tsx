@@ -1,7 +1,7 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { Flag, HelpCircle, LifeBuoy, Lock } from "lucide-react";
 
-export function 7SafetySupportSection() {
+export function SafetySupportSection() {
   return (
     <section className="space-y-3">
       <h3 className="px-1 text-sm font-medium text-muted-foreground">Sécurité & support</h3>

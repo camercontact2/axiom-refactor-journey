@@ -6,7 +6,7 @@ import { ScoreBar } from "@/features/trust/components/ScoreBar";
 import { PROFILE, SCORES } from "../data";
 import { ScoreBar } from "../components/ScoreBar";
 
-export function 1TrustHeroSection() {
+export function TrustHeroSection() {
   return (
     <SmartCard glow="trust" className="space-y-5">
       <div className="flex items-start gap-3">
