@@ -3,7 +3,6 @@ import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
-import { TRUST_ITEMS, USER } from "@/features/profile/data";
 import { USER, TRUST_ITEMS } from "../data";
 
 export function TrustSnapshotSection() {

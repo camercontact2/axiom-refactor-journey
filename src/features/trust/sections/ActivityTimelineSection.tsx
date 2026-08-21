@@ -1,5 +1,4 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
-import { TIMELINE } from "@/features/trust/data";
 import { TIMELINE } from "../data";
 
 export function ActivityTimelineSection() {

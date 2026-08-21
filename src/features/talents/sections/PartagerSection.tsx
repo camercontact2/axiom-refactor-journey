@@ -3,7 +3,6 @@ import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { DetailDialog } from "@/components/ui-kit/DetailDialog";
 import { Button } from "@/components/ui/button";
 import { Heart, ShieldCheck } from "lucide-react";
-import { ACCENT } from "@/features/talents/data";
 import { ACCENT } from "../data";
 
 export function PartagerSection() {

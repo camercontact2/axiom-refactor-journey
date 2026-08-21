@@ -3,7 +3,6 @@ import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { DetailDialog } from "@/components/ui-kit/DetailDialog";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, BookOpen, Calendar, MapPin, MessageCircle, Star } from "lucide-react";
-import { ACCENT, FEATURED } from "@/features/talents/data";
 import { ACCENT, FEATURED } from "../data";
 
 export function FeaturedSection() {

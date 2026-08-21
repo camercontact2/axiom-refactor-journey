@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { ArrowUpRight } from "lucide-react";
-import { ACCENT, RESOURCES } from "@/features/creation/data";
 import { ACCENT, RESOURCES } from "../data";
 
 export function ResourcesSection() {

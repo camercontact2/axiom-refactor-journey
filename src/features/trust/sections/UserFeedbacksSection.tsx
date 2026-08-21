@@ -1,6 +1,5 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { BadgeCheck } from "lucide-react";
-import { FEEDBACKS } from "@/features/trust/data";
 import { FEEDBACKS } from "../data";
 
 export function UserFeedbacksSection() {

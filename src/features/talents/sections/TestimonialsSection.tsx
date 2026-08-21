@@ -1,5 +1,4 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
-import { TESTIMONIALS } from "@/features/talents/data";
 import { TESTIMONIALS } from "../data";
 
 export function TestimonialsSection() {

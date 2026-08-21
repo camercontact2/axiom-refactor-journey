@@ -1,7 +1,6 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { TrustBadge } from "@/components/ui-kit/TrustBadge";
 import { BadgeCheck } from "lucide-react";
-import { PROFILE, SCORES } from "@/features/trust/data";
 import { ScoreBar } from "@/features/trust/components/ScoreBar";
 import { PROFILE, SCORES } from "../data";
 import { ScoreBar } from "../components/ScoreBar";

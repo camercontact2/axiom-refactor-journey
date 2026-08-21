@@ -1,6 +1,5 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { DetailDialog } from "@/components/ui-kit/DetailDialog";
-import { ACCENT, STEPS } from "@/features/creation/data";
 import { ACCENT, STEPS } from "../data";
 
 export function StepsSection() {

@@ -3,7 +3,6 @@ import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { DetailDialog } from "@/components/ui-kit/DetailDialog";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
-import { ACCENT, PROJECTS } from "@/features/creation/data";
 import { ACCENT, PROJECTS } from "../data";
 
 export function ProjectsSection() {

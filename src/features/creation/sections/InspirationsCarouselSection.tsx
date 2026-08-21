@@ -6,7 +6,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ACCENT, INSPIRATIONS } from "@/features/creation/data";
 import { ACCENT, INSPIRATIONS } from "../data";
 
 export function InspirationsCarouselSection() {

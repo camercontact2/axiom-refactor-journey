@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BadgeCheck, Pencil, ShieldCheck } from "lucide-react";
-import { USER } from "@/features/profile/data";
 import { USER } from "../data";
 
 export function HeroSection() {

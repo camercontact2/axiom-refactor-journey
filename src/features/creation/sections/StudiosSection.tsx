@@ -1,5 +1,4 @@
 import { DetailDialog } from "@/components/ui-kit/DetailDialog";
-import { ACCENT, STUDIOS } from "@/features/creation/data";
 import { ACCENT, STUDIOS } from "../data";
 
 export function StudiosSection() {

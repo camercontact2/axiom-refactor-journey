@@ -1,5 +1,4 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
-import { INDICATORS } from "@/features/trust/data";
 import { INDICATORS } from "../data";
 
 export function TrustIndicatorsSection() {

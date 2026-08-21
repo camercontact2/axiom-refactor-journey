@@ -1,7 +1,6 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { Button } from "@/components/ui/button";
 import { Plus, Rocket, Users } from "lucide-react";
-import { ACCENT } from "@/features/creation/data";
 import { ACCENT } from "../data";
 
 export function HeroSection() {

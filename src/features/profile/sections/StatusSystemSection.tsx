@@ -1,5 +1,4 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
-import { LEVELS, USER } from "@/features/profile/data";
 import { USER, LEVELS } from "../data";
 
 export function StatusSystemSection() {

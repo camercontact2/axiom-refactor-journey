@@ -1,5 +1,4 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
-import { BADGES, VERIFICATIONS } from "@/features/trust/data";
 import { VERIFICATIONS, BADGES } from "../data";
 
 export function VerificationStatusSection() {

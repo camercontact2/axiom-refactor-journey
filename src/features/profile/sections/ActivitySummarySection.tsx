@@ -1,5 +1,4 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
-import { ACTIVITY } from "@/features/profile/data";
 import { ACTIVITY } from "../data";
 
 export function ActivitySummarySection() {

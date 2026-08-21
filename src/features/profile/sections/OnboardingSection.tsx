@@ -1,11 +1,11 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { Progress } from "@/components/ui/progress";
 import { Sparkles } from "lucide-react";
-import { USER } from "@/features/profile/data";
 import { USER } from "../data";
 
 export function OnboardingSection() {
   return (
+    <>
     {USER.completion < 100 && (
       <SmartCard className="border border-[color-mix(in_oklch,var(--primary)_25%,transparent)]">
         <div className="flex items-start gap-3">
@@ -32,5 +32,6 @@ export function OnboardingSection() {
         </div>
       </SmartCard>
     )}
+    </>
   );
 }

@@ -1,6 +1,5 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { BadgeCheck } from "lucide-react";
-import { PROOFS } from "@/features/trust/data";
 import { PROOFS } from "../data";
 
 export function ProofsTransparencySection() {

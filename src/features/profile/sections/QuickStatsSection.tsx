@@ -1,4 +1,3 @@
-import { STATS } from "@/features/profile/data";
 import { STATS } from "../data";
 
 export function QuickStatsSection() {

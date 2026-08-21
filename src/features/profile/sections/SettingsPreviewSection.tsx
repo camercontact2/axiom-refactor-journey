@@ -1,6 +1,5 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { ChevronRight } from "lucide-react";
-import { SETTINGS } from "@/features/profile/data";
 import { SETTINGS } from "../data";
 
 export function SettingsPreviewSection() {

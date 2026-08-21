@@ -1,5 +1,4 @@
 import { DetailDialog } from "@/components/ui-kit/DetailDialog";
-import { ACCENT, CATEGORIES } from "@/features/talents/data";
 import { ACCENT, CATEGORIES } from "../data";
 
 export function CategoriesSection() {

@@ -1,7 +1,6 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { DetailDialog } from "@/components/ui-kit/DetailDialog";
 import { ArrowUpRight } from "lucide-react";
-import { ACCENT, PILLARS } from "@/features/talents/data";
 import { ACCENT, PILLARS } from "../data";
 
 export function PillarsSection() {

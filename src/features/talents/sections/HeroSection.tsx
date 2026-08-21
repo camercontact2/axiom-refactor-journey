@@ -1,7 +1,6 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { Button } from "@/components/ui/button";
 import { Search, Sparkles } from "lucide-react";
-import { ACCENT } from "@/features/talents/data";
 import { ACCENT } from "../data";
 
 export function HeroSection() {

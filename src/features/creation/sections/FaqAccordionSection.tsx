@@ -6,7 +6,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { HelpCircle } from "lucide-react";
-import { ACCENT, FAQ } from "@/features/creation/data";
 import { ACCENT, FAQ } from "../data";
 
 export function FaqAccordionSection() {

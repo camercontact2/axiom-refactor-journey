@@ -1,6 +1,5 @@
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { Calendar } from "lucide-react";
-import { TRANSPARENCY } from "@/features/trust/data";
 import { TRANSPARENCY } from "../data";
 
 export function TransparencyInfoPanelSection() {

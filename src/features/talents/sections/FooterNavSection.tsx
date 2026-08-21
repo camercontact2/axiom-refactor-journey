@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Compass } from "lucide-react";
-import { ACCENT } from "@/features/talents/data";
 import { ACCENT } from "../data";
 
 export function FooterNavSection() {

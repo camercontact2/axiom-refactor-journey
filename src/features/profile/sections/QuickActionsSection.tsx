@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import { QUICK_ACTIONS } from "@/features/profile/data";
 import { QUICK_ACTIONS } from "../data";
 
 export function QuickActionsSection() {
