@@ -4,23 +4,9 @@ import { AppShell } from "@/components/layout/AppShell";
 import { HubHeader } from "@/components/hub/HubHeader";
 import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { TrustBadge, LiveDot } from "@/components/ui-kit/TrustBadge";
-import {
-  ScanSearch,
-  Search,
-  MapPin,
-  Sparkles,
-  Flame,
-  Zap,
-  Briefcase,
-  HandHeart,
-  Tag,
-  TrendingUp,
-  Clock,
-  ArrowUpRight,
-  MessageCircle,
-  Eye,
-  Filter,
-} from "lucide-react";
+import { ArrowUpRight, Clock, Eye, Filter, MapPin, MessageCircle, ScanSearch, Search, Sparkles, TrendingUp, Zap } from "lucide-react";
+import { FILTERS, FEED, NEARBY, TRENDING, URGENT, SUGGESTIONS } from "@/features/scan/data";
+import { StatusBadge } from "@/features/scan/components/StatusBadge";
 
 export const Route = createFileRoute("/scan")({
   head: () => ({
@@ -31,82 +17,6 @@ export const Route = createFileRoute("/scan")({
   }),
   component: ScanPage,
 });
-
-const FILTERS = [
-  { id: "all", label: "À proximité", icon: MapPin },
-  { id: "urgent", label: "Urgents", icon: Zap },
-  { id: "trending", label: "Tendances", icon: TrendingUp },
-  { id: "promo", label: "Promotions", icon: Tag },
-  { id: "service", label: "Services", icon: Sparkles },
-  { id: "job", label: "Emplois", icon: Briefcase },
-  { id: "need", label: "Besoins", icon: HandHeart },
-  { id: "flash", label: "Ventes Flash", icon: Flame },
-];
-
-type Status = "urgent" | "flash" | "trending" | "normal";
-
-const FEED: {
-  id: string;
-  title: string;
-  category: string;
-  cat: string;
-  distance: string;
-  status: Status;
-  desc: string;
-  score: number;
-}[] = [
-  { id: "1", title: "Électricien disponible ce soir", category: "Service", cat: "service", distance: "0.4 km", status: "urgent", desc: "Intervention rapide, dépannage et installation.", score: 92 },
-  { id: "2", title: "iPhone 15 Pro — vente flash", category: "Vente", cat: "flash", distance: "1.2 km", status: "flash", desc: "Neuf, sous garantie. -25% pendant 2h.", score: 88 },
-  { id: "3", title: "Cherche graphiste freelance", category: "Besoin", cat: "need", distance: "2.1 km", status: "trending", desc: "Mission courte, branding pour startup.", score: 81 },
-  { id: "4", title: "Cours de yoga en plein air", category: "Service", cat: "service", distance: "0.8 km", status: "normal", desc: "Séance collective dimanche matin.", score: 86 },
-  { id: "5", title: "Livraison express dispo", category: "Emploi", cat: "job", distance: "1.6 km", status: "trending", desc: "Mission ponctuelle, 2h, bien rémunérée.", score: 79 },
-];
-
-const NEARBY = [
-  { title: "Café Nuage", tag: "Coworking · Wifi", dist: "0.3 km", score: 92 },
-  { title: "Atelier 12", tag: "Studio créatif", dist: "0.6 km", score: 87 },
-  { title: "Marché Local", tag: "Producteurs", dist: "0.9 km", score: 90 },
-];
-
-const TRENDING = [
-  { title: "Plomberie express", count: "248 vues" },
-  { title: "Garde d'enfants soir", count: "189 vues" },
-  { title: "Livreur véhiculé", count: "164 vues" },
-];
-
-const URGENT = [
-  { title: "Aide déménagement ce soir", dist: "1.1 km", time: "dans 2h" },
-  { title: "Pièces auto recherchées", dist: "2.4 km", time: "urgent" },
-];
-
-const SUGGESTIONS = [
-  "À proximité de vous",
-  "Offres Flash populaires",
-  "Besoins similaires à votre zone",
-  "Services tendance cette semaine",
-];
-
-function StatusBadge({ status }: { status: Status }) {
-  const map: Record<Status, { label: string; color: string }> = {
-    urgent: { label: "Urgent", color: "var(--live)" },
-    flash: { label: "Flash", color: "var(--flash)" },
-    trending: { label: "Tendance", color: "var(--scan)" },
-    normal: { label: "Normal", color: "var(--muted-foreground)" },
-  };
-  const { label, color } = map[status];
-  return (
-    <span
-      className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium"
-      style={{
-        background: `color-mix(in oklch, ${color} 14%, transparent)`,
-        color,
-        boxShadow: `inset 0 0 0 1px color-mix(in oklch, ${color} 35%, transparent)`,
-      }}
-    >
-      {label}
-    </span>
-  );
-}
 
 function ScanPage() {
   const [active, setActive] = useState("all");

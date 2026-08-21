@@ -1,32 +1,26 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Zap, Radar, ShieldCheck, MapPin } from "lucide-react";
+import { Radar } from "lucide-react";
 import { AppShell } from "@/components/layout/AppShell";
-import { SmartHero } from "@/components/home/SmartHero";
-import { HubGrid } from "@/components/home/HubGrid";
-import { LiveStrip } from "@/components/home/LiveStrip";
-import { SmartSuggestions } from "@/components/home/SmartSuggestions";
-import { TrustHint } from "@/components/home/TrustHint";
-import { RecentActivity } from "@/components/home/RecentActivity";
-import { Opportunities } from "@/components/home/Opportunities";
-import { HowItWorks } from "@/components/home/HowItWorks";
-import { CommunityPulse } from "@/components/home/CommunityPulse";
-import { FinalCTA } from "@/components/home/FinalCTA";
+import { SmartHero } from "@/features/home/components/SmartHero";
+import { HubGrid } from "@/features/home/components/HubGrid";
+import { LiveStrip } from "@/features/home/components/LiveStrip";
+import { SmartSuggestions } from "@/features/home/components/SmartSuggestions";
+import { TrustHint } from "@/features/home/components/TrustHint";
+import { RecentActivity } from "@/features/home/components/RecentActivity";
+import { Opportunities } from "@/features/home/components/Opportunities";
+import { HowItWorks } from "@/features/home/components/HowItWorks";
+import { CommunityPulse } from "@/features/home/components/CommunityPulse";
+import { FinalCTA } from "@/features/home/components/FinalCTA";
 import { LivePulse } from "@/components/ui-kit/LivePulse";
-import { FeaturesShowcase } from "@/components/home/FeaturesShowcase";
-import { UseCases } from "@/components/home/UseCases";
-import { QuickFAQ } from "@/components/home/QuickFAQ";
-import { CTAJourney } from "@/components/home/CTAJourney";
-import { Reveal } from "@/components/home/Reveal";
-import { Testimonials } from "@/components/home/Testimonials";
+import { FeaturesShowcase } from "@/features/home/components/FeaturesShowcase";
+import { UseCases } from "@/features/home/components/UseCases";
+import { QuickFAQ } from "@/features/home/components/QuickFAQ";
+import { CTAJourney } from "@/features/home/components/CTAJourney";
+import { Reveal } from "@/features/home/components/Reveal";
+import { Testimonials } from "@/features/home/components/Testimonials";
 import { track, useScrollDepth, useSectionTime } from "@/lib/analytics";
 import { useEffect } from "react";
-
-const HOME_LIVE = [
-  { icon: <Zap className="h-3 w-3" />, text: "Marc vient de publier un flash livraison" },
-  { icon: <Radar className="h-3 w-3" />, text: "3 besoins urgents à Akwa" },
-  { icon: <ShieldCheck className="h-3 w-3" />, text: "Léa a vérifié son profil" },
-  { icon: <MapPin className="h-3 w-3" />, text: "Nouveau lieu repéré à Bonapriso" },
-];
+import { HOME_LIVE } from "@/features/home/data";
 
 export const Route = createFileRoute("/")({
   head: () => ({
