@@ -115,10 +115,10 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <PersistedQueryProvider client={queryClient}>
       <PrefsProvider>
         <Outlet />
       </PrefsProvider>
-    </QueryClientProvider>
+    </PersistedQueryProvider>
   );
 }
