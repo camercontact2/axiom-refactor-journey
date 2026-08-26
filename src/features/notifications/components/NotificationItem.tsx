@@ -27,8 +27,16 @@ export function NotificationItem({
       className="animate-[fade-up_0.4s_var(--ease-smooth)_both]"
       style={animationStyle}
     >
-      <button
+      <div
+        role="button"
+        tabIndex={0}
         onClick={() => setShowActions((v) => !v)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setShowActions((v) => !v);
+          }
+        }}
         className={cn(
           "glass-surface group w-full rounded-2xl px-4 py-3 text-left transition-all duration-200 hover:-translate-y-0.5",
           isUnread && "ring-1",
@@ -174,7 +182,7 @@ export function NotificationItem({
             />
           )}
         </div>
-      </button>
+      </div>
     </div>
   );
 }
