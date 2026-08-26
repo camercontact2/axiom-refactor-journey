@@ -1,4 +1,5 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import type { QueryClient } from "@tanstack/react-query";
+import { PersistedQueryProvider } from "@/lib/query-persist";
 import {
   Outlet,
   Link,
@@ -115,10 +116,10 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <PersistedQueryProvider client={queryClient}>
       <PrefsProvider>
         <Outlet />
       </PrefsProvider>
-    </QueryClientProvider>
+    </PersistedQueryProvider>
   );
 }
