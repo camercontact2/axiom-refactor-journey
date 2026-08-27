@@ -22,7 +22,7 @@ ROUTES = [
     "/talents", "/creation", "/messages", "/notifications", "/profile",
 ]
 VIEWPORTS = {"mobile": (375, 812), "tablette": (768, 1024), "desktop": (1280, 900)}
-MAX_NAV_MS = 1200  # navigation interne consideree comme lente au-dela
+MAX_NAV_MS = 2500  # seuil dev (Vite compile les pages a la demande) ; en production c'est bien plus rapide
 
 SCREENSHOTS = Path("/tmp/browser/qa")
 
