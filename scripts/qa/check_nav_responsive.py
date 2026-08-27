@@ -27,6 +27,12 @@ MAX_NAV_MS = 1200  # navigation interne consideree comme lente au-dela
 SCREENSHOTS = Path("/tmp/browser/qa")
 
 
+async def dismiss_onboarding(page) -> None:
+    """L'onboarding s'affiche au premier lancement et bloque les clics : on le marque comme vu."""
+    await page.goto(BASE + "/", wait_until="domcontentloaded")
+    await page.evaluate("() => localStorage.setItem('vitala.onboarding.done.v1', '1')")
+
+
 async def main() -> int:
     SCREENSHOTS.mkdir(parents=True, exist_ok=True)
     failures: list[str] = []
@@ -38,6 +44,7 @@ async def main() -> int:
         for name, (w, h) in VIEWPORTS.items():
             context = await browser.new_context(viewport={"width": w, "height": h})
             page = await context.new_page()
+            await dismiss_onboarding(page)
             errors: list[str] = []
             page.on("pageerror", lambda e: errors.append(str(e)))
 
@@ -57,6 +64,7 @@ async def main() -> int:
         # 3 — vitesse de navigation interne (clic sur les liens du dock)
         context = await browser.new_context(viewport={"width": 1280, "height": 900})
         page = await context.new_page()
+        await dismiss_onboarding(page)
         await page.goto(BASE + "/", wait_until="networkidle")
         for route in ROUTES[1:]:
             link = page.locator(f'a[href="{route}"]').first
