@@ -1,70 +1,109 @@
-## Goal
+# VITALA — Route vers la production (100/100, 5M+ utilisateurs)
 
-Port the public repo `stamdollar/axiom-scape-refactor` (branch `main`) into this project as a full 1:1 copy. Both projects use the same Lovable TanStack Start template, so routing and config don't need conversion — just file transfer + dependency alignment.
+Aujourd'hui VITALA est une belle maquette : 10 pages, un design system, des
+données de démonstration en dur, aucune base de données, aucun compte
+utilisateur. Le plan ci-dessous transforme cette maquette en produit réel,
+étape par étape. Chaque étape est autonome, testable, et livrable seule.
 
-## What's in the source repo
+## Phase 0 — Fondations backend (étapes 1 à 5)
 
-Same template as this project. App source consists of:
+1. **Activer Lovable Cloud** — base de données, comptes, stockage de fichiers
+   et code serveur intégrés. Aucune configuration externe.
+2. **Comptes utilisateurs** — inscription/connexion e-mail + mot de passe,
+   page `/auth`, déconnexion, session persistante, zone privée protégée.
+3. **Profils** — table `profiles` (nom, ville, avatar, bio), création
+   automatique à l'inscription, page `/profile` branchée sur les vraies
+   données.
+4. **Rôles & permissions** — table de rôles séparée (`user`, `moderator`,
+   `admin`) + fonction de vérification côté serveur. Base de toute la
+   modération.
+5. **Sécurité des données (RLS)** — chaque table verrouillée : on ne lit et
+   n'écrit que ce qui nous appartient. Politiques + droits d'accès explicites.
 
-- **Routes** (`src/routes/`): `__root.tsx`, `index.tsx`, `creation.tsx`, `flash.tsx`, `messages.tsx`, `notifications.tsx`, `profile.tsx`, `radar.tsx`, `scan.tsx`, `talents.tsx`, `trust.tsx`, `trust.tsx`, plus one server route `api/assistant.ts` (likely an AI endpoint).
-- **App components** (`src/components/`): `ai/`, `ds/`, `home/` (12 files), `hub/`, `layout/` (TopBar, AppShell, FloatingDock, CategoriesSheet), `onboarding/`, `preferences/`, `scan/`, `ui-kit/` (5 files). The `ui/` shadcn folder mostly overlaps with what this project already has.
-- **Hooks**: `use-mobile.tsx` (exists), `useReveal.ts` (new).
-- **Lib**: `analytics.ts`, `messaging.ts`, `notifications.ts`, `preferences.ts`, `utils.ts`, `error-capture.ts`, `error-page.ts` (last three exist here).
-- **Bootstrap**: `router.tsx`, `server.ts`, `start.ts`, `styles.css` (replaces current one — has the project's full design system, ~10KB).
-- **Configs**: `package.json` (a few extra deps), `vite.config.ts`, `tsconfig.json`, `components.json`, `eslint.config.js`, `.prettierrc`, `.prettierignore`, `bunfig.toml`, `AGENTS.md`.
+## Phase 1 — Le cœur métier (étapes 6 à 13)
 
-No `src/assets/` folder, no `public/` images, no database/Supabase code. The `api/assistant.ts` route reads an env var (probably `LOVABLE_API_KEY` for the Lovable AI Gateway).
+6. **Flash — modèle de données** — table des annonces (type, titre, prix,
+   lieu, durée, expiration, statut) + droits d'accès.
+7. **Flash — publication** — le formulaire existant écrit réellement en base,
+   validation des champs, retour d'erreur clair.
+8. **Flash — lecture** — fil des annonces récentes, « Mes flashs », édition,
+   suppression, expiration automatique.
+9. **Médias** — upload d'images (annonces, avatars) avec compression,
+   miniatures et limites de taille.
+10. **Radar — besoins** — table des intentions/veilles, création, activation,
+    désactivation.
+11. **Radar — matching** — moteur de correspondance besoin ↔ annonce
+    (mots-clés + catégorie + distance), exécuté côté serveur.
+12. **Scan — géolocalisation** — coordonnées sur les annonces, recherche par
+    rayon, tri par distance, autorisation navigateur gérée proprement.
+13. **Trust — score de confiance** — vérifications (e-mail, téléphone,
+    identité), avis entre utilisateurs, calcul du score côté serveur.
 
-## Plan
+## Phase 2 — Interactions & vie sociale (étapes 14 à 19)
 
-```text
-1. Clone the repo to /tmp/source via `git clone`.
-2. Diff package.json and `bun add` only the new deps:
-     embla-carousel-react, input-otp, react-day-picker,
-     react-resizable-panels, recharts, vaul, cmdk, date-fns,
-     @hookform/resolvers, react-hook-form, zod (any not already present).
-3. Overwrite/copy from /tmp/source -> this project, preserving paths:
-     - src/styles.css          (replaces current design tokens)
-     - src/router.tsx
-     - src/server.ts
-     - src/start.ts
-     - src/routes/__root.tsx   (overwrites our shell)
-     - src/routes/index.tsx    (replaces the placeholder)
-     - src/routes/{creation,flash,messages,notifications,profile,
-                   radar,scan,talents,trust}.tsx
-     - src/routes/api/assistant.ts
-     - src/components/{ai,ds,home,hub,layout,onboarding,preferences,
-                       scan,ui-kit}/**
-     - src/components/ui/**    (only files NOT already present;
-                                skip identical shadcn primitives we have)
-     - src/hooks/useReveal.ts
-     - src/lib/{analytics,messaging,notifications,preferences}.ts
-     - src/lib/utils.ts        (only if it differs)
-     - components.json, AGENTS.md, .prettierrc, .prettierignore, bunfig.toml
-4. Do NOT copy: src/routeTree.gen.ts (auto-generated by the
-   TanStack Router plugin), bun.lock, .lovable/, vite.config.ts /
-   tsconfig.json / eslint.config.js (kept from this project unless
-   the diff actually matters; reviewed before any overwrite).
-5. If src/routes/api/assistant.ts reads LOVABLE_API_KEY or another
-   AI gateway secret, enable Lovable AI Gateway so the env var is
-   provisioned. (Confirmed by reading the file after clone.)
-6. Wait for the auto-restart, then verify in the preview:
-     - Home (/) renders the real landing page, not the placeholder
-     - At least one secondary route loads (e.g. /scan, /radar)
-     - No console errors, no Vite resolve errors
-```
+14. **Messagerie — données** — conversations et messages en base, liés à une
+    annonce ou un besoin.
+15. **Messagerie — temps réel** — réception instantanée, indicateur lu/non lu,
+    présence en ligne.
+16. **Notifications — données** — table + génération automatique (nouveau
+    message, match radar, annonce expirée).
+17. **Notifications — livraison** — badge temps réel, marquage lu, préférences
+    par type.
+18. **Talents & Création** — modèles réels pour les profils talents, projets
+    et studios, aujourd'hui statiques.
+19. **Recherche globale** — recherche plein texte sur annonces, talents et
+    projets, avec index base de données.
 
-## Notes
+## Phase 3 — Confiance, sûreté, conformité (étapes 20 à 23)
 
-- The source's `.lovable/plan.md` is a historical artifact and is intentionally not copied.
-- This project's `src/lib/error-capture.ts`, `error-page.ts`, `lovable-error-reporting.ts` stay as-is — they're Lovable runtime instrumentation, not app code.
-- After the copy, the home route will match the source's landing page; the previous placeholder is removed.
-- Because the source has no SEO/OG images per route, route `head()` blocks will land verbatim — no new image generation needed.
+20. **Signalement & modération** — bouton signaler, file de modération pour
+    les admins, blocage d'utilisateur.
+21. **Anti-abus** — limitation du nombre de publications/messages par heure,
+    détection de spam, protection des endpoints publics.
+22. **RGPD** — pages Confidentialité et CGU, consentement, export et
+    suppression de compte.
+23. **Audit de sécurité complet** — scan, correction de chaque alerte, revue
+    des politiques d'accès et des secrets.
 
-## Out of scope (ask if you want any)
+## Phase 4 — Performance & montée en charge (étapes 24 à 28)
 
-- Connecting this project's GitHub to the same repo (different concern; reply if you want the link).
-- Database/auth — not present in source.
-- Adapting design tokens further (the source's `styles.css` becomes the new design system).
+24. **Index & requêtes** — index sur toutes les colonnes filtrées/triées,
+    suppression des requêtes N+1.
+25. **Pagination** — listes infinies par curseur (annonces, messages,
+    notifications) au lieu de tout charger.
+26. **Chargement des pages** — préchargement par intention déjà en place,
+    étendu : squelettes, images en AVIF/WebP, découpe du code par route.
+27. **Budget de performance** — mesure Lighthouse/Core Web Vitals sur les 10
+    pages, objectif LCP < 2,5 s, correction des écarts.
+28. **Résilience** — pages d'erreur, mode hors-ligne, réessai automatique,
+    surveillance des erreurs en production.
 
-Approve and I'll execute steps 1–6.
+## Phase 5 — Finition & lancement (étapes 29 à 32)
+
+29. **Qualité du code** — extraction des dernières données factices, typage
+    strict, lint zéro avertissement, README par domaine à jour.
+30. **Tests** — tests unitaires sur les règles métier, tests de bout en bout
+    Playwright sur les 6 parcours clés (inscription, publier, chercher,
+    contacter, noter, modérer).
+31. **SEO & partage** — métadonnées par page, images de partage, sitemap,
+    données structurées, page 404 utile.
+32. **Mise en production** — publication, domaine personnalisé, tableau de
+    bord analytics, checklist finale de lancement.
+
+## Notes techniques
+
+- Backend : Lovable Cloud (Postgres + auth + stockage). Logique serveur en
+  fonctions serveur TanStack Start ; endpoints publics uniquement pour les
+  webhooks.
+- Sécurité : rôles dans une table dédiée, RLS sur 100 % des tables, aucun
+  secret côté navigateur.
+- Scalabilité : pagination par curseur, index ciblés, cache client
+  stale-while-revalidate déjà en place, temps réel limité aux canaux utiles.
+- Chaque étape se termine par : typecheck + tests verts + vérification
+  visuelle de la page concernée.
+
+## Ordre recommandé
+
+Les étapes 1 à 5 sont bloquantes : rien de réel n'est possible sans compte ni
+base. Ensuite Flash (6-9) donne le premier parcours complet et démontrable.
+Les phases suivantes peuvent être réordonnées selon tes priorités business.
