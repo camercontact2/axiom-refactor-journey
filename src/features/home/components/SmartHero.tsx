@@ -37,7 +37,9 @@ export function SmartHero({ name = "Alex" }: { name?: string }) {
 
       {/* Smart action bar — single central entry point */}
       <button
-        className="group relative w-full overflow-hidden rounded-2xl text-left transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.99]"
+        type="button"
+        aria-label="Publier, chercher un service ou exprimer un besoin"
+        className="group relative min-h-11 w-full overflow-hidden rounded-2xl text-left transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.99]"
         style={{
           background:
             "linear-gradient(135deg, color-mix(in oklch, var(--primary) 14%, var(--glass)), var(--glass))",
@@ -65,29 +67,29 @@ export function SmartHero({ name = "Alex" }: { name?: string }) {
               color: "var(--primary)",
             }}
           >
-            <Sparkles className="h-4 w-4" />
+            <Sparkles aria-hidden="true" className="h-4 w-4" />
           </div>
           <div className="min-w-0 flex-1">
             <p className="text-[13px] sm:text-sm font-medium leading-snug text-foreground/90">
               Publier, chercher un service, ou exprimer un besoin…
             </p>
-            <p className="mt-0.5 text-[11px] leading-snug text-muted-foreground">
+            <p className="home-meta mt-0.5">
               Une seule action — VITALA t'oriente
             </p>
           </div>
-          <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
+          <ArrowRight aria-hidden="true" className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-1" />
         </div>
       </button>
 
       {/* Micro pulse row — context immédiat */}
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 px-1 text-[11px] text-muted-foreground">
         <span className="inline-flex items-center gap-1">
-          <MapPin className="h-3 w-3 shrink-0" style={{ color: "var(--scan)" }} />
+          <MapPin aria-hidden="true" className="h-3 w-3 shrink-0" style={{ color: "var(--scan)" }} />
           Akwa, Douala
         </span>
         <span className="opacity-40">·</span>
         <span className="inline-flex flex-wrap items-center gap-1">
-          <Activity className="h-3 w-3 shrink-0" style={{ color: "var(--flash)" }} />
+          <Activity aria-hidden="true" className="h-3 w-3 shrink-0" style={{ color: "var(--flash)" }} />
           <span className="text-foreground/80">128</span>
           <span>personnes actives autour</span>
         </span>

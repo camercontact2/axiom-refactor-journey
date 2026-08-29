@@ -26,10 +26,10 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="space-y-3">
-      <div className="flex items-center justify-between px-1">
-        <h2 className="text-sm font-medium text-muted-foreground">Comment ça marche</h2>
-        <span className="text-[11px] text-muted-foreground">3 étapes, zéro friction</span>
+    <section className="home-section">
+      <div className="home-section-head">
+        <h2 className="home-section-title">Comment ça marche</h2>
+        <span className="home-meta">3 étapes, zéro friction</span>
       </div>
       <div className="space-y-2">
         {steps.map((s, i) => {
@@ -51,7 +51,7 @@ export function HowItWorks() {
                   boxShadow: `inset 0 0 0 1px color-mix(in oklch, ${s.color} 30%, transparent)`,
                 }}
               >
-                <Icon className="h-5 w-5" strokeWidth={2.2} />
+                <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={2.2} />
               </div>
               <div className="relative min-w-0 flex-1">
                 <div className="flex items-center gap-2">
@@ -63,7 +63,7 @@ export function HowItWorks() {
                   </span>
                   <span className="text-sm font-semibold text-foreground/95">{s.title}</span>
                 </div>
-                <p className="mt-0.5 text-[12px] leading-relaxed text-muted-foreground">
+                <p className="home-body mt-0.5">
                   {s.desc}
                 </p>
               </div>

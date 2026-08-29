@@ -21,8 +21,8 @@ export function TrustHint() {
           const Icon = p.icon;
           return (
             <div key={i} className="flex min-w-0 items-center gap-2">
-              <Icon className="h-4 w-4 shrink-0" style={{ color: "var(--trust)" }} />
-              <span className="text-[12px] leading-snug text-foreground/85">{p.label}</span>
+              <Icon aria-hidden="true" className="h-4 w-4 shrink-0" style={{ color: "var(--trust)" }} />
+              <span className="text-[12px] leading-snug text-foreground/90">{p.label}</span>
             </div>
           );
         })}

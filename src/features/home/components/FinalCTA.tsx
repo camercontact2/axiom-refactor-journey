@@ -30,7 +30,7 @@ export function FinalCTA() {
             color: "var(--primary)",
           }}
         >
-          <Sparkles className="h-3 w-3" />
+          <Sparkles aria-hidden="true" className="h-3 w-3" />
           Rejoins le mouvement
         </div>
 
@@ -38,7 +38,7 @@ export function FinalCTA() {
           <h3 className="text-lg font-semibold leading-tight tracking-tight text-foreground">
             Une seule app. <span className="text-gradient-primary">Mille possibilités.</span>
           </h3>
-          <p className="text-[12px] leading-relaxed text-muted-foreground">
+          <p className="home-body">
             Publie, demande, découvre, vérifie — tout au même endroit. VITALA t'oriente, la
             communauté fait le reste.
           </p>
@@ -54,7 +54,7 @@ export function FinalCTA() {
               boxShadow: "0 6px 20px -8px var(--primary)",
             }}
           >
-            Publier maintenant <ArrowRight className="h-3.5 w-3.5" />
+            Publier maintenant <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
           </Link>
           <Link
             to="/scan"
