@@ -3,12 +3,10 @@ import { useEffect } from "react";
 import { AppShell } from "@/components/layout/AppShell";
 import { SmartHero } from "@/features/home/components/SmartHero";
 import { HubGrid } from "@/features/home/components/HubGrid";
-import { HowItWorks } from "@/features/home/components/HowItWorks";
-import { LiveStrip } from "@/features/home/components/LiveStrip";
-import { TrustHint } from "@/features/home/components/TrustHint";
-import { FinalCTA } from "@/features/home/components/FinalCTA";
+import { LazyBlock } from "@/features/home/components/LazyBlock";
 import { Reveal } from "@/features/home/components/Reveal";
 import { track, useScrollDepth, useSectionTime } from "@/lib/analytics";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
