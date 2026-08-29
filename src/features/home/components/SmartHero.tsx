@@ -1,16 +1,25 @@
+import { useEffect, useState } from "react";
 import { Sparkles, ArrowRight, MapPin, Activity } from "lucide-react";
 
-export function SmartHero({ name = "Alex" }: { name?: string }) {
-  const hour = new Date().getHours();
-  const greet =
-    hour < 6 ? "Encore debout" : hour < 12 ? "Bonjour" : hour < 18 ? "Bel après-midi" : "Bonsoir";
+function greetingFor(hour: number) {
+  return {
+    greet:
+      hour < 6 ? "Encore debout" : hour < 12 ? "Bonjour" : hour < 18 ? "Bel après-midi" : "Bonsoir",
+    punch:
+      hour < 12
+        ? "On démarre fort ?"
+        : hour < 18
+        ? "C'est le moment de bouger."
+        : "La ville s'active — t'es prêt ?",
+  };
+}
 
-  const punch =
-    hour < 12
-      ? "On démarre fort ?"
-      : hour < 18
-      ? "C'est le moment de bouger."
-      : "La ville s'active — t'es prêt ?";
+export function SmartHero({ name = "Alex" }: { name?: string }) {
+  // Rendu serveur neutre puis ajustement après hydratation (évite les mismatchs).
+  const [{ greet, punch }, setGreeting] = useState(() => greetingFor(12));
+  useEffect(() => {
+    setGreeting(greetingFor(new Date().getHours()));
+  }, []);
 
   return (
     <header className="space-y-4">
