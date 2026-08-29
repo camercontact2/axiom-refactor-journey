@@ -366,3 +366,91 @@
 }
 
 
+
+/* ─── Home design system: tokens ─── */
+:root {
+  /* espacements */
+  --home-gap-section: 3rem;
+  --home-gap-block: 0.75rem;
+  --home-gap-tight: 0.5rem;
+  --home-pad-card: 1rem;
+  --home-pad-row: 0.75rem;
+
+  /* typographie */
+  --home-text-display: 1.375rem;
+  --home-text-title: 1.0625rem;
+  --home-text-body: 0.8125rem;
+  --home-text-meta: 0.6875rem;
+
+  /* surfaces */
+  --home-radius-card: var(--radius-2xl);
+  --home-icon-size: 2.5rem;
+}
+
+@utility home-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-gap-section);
+}
+
+@utility home-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-gap-block);
+}
+
+@utility home-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-inline: 0.25rem;
+}
+
+@utility home-section-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+@utility home-meta {
+  font-size: var(--home-text-meta);
+  line-height: 1.4;
+  color: var(--muted-foreground);
+}
+
+@utility home-body {
+  font-size: var(--home-text-body);
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+
+@utility home-card {
+  border-radius: var(--home-radius-card);
+  padding: var(--home-pad-card);
+}
+
+@utility home-icon-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--home-icon-size);
+  width: var(--home-icon-size);
+  flex-shrink: 0;
+  border-radius: var(--radius-xl);
+}
+
+/* ─── Accessibilité : focus visible homogène ─── */
+:where(a, button, [role="button"], [tabindex]:not([tabindex="-1"]), summary):focus-visible {
+  outline: 2px solid color-mix(in oklch, var(--ring) 85%, transparent);
+  outline-offset: 3px;
+  border-radius: var(--radius-md);
+}
+
+/* ─── Lazy blocks ─── */
+.home-block-skeleton {
+  border-radius: var(--home-radius-card);
+  background: color-mix(in oklch, var(--surface-1) 55%, transparent);
+  border: 1px solid var(--glass-border);
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
