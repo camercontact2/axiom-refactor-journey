@@ -11,7 +11,7 @@ import { ActivitySummarySection } from "@/features/profile/sections/ActivitySumm
 import { QuickActionsSection } from "@/features/profile/sections/QuickActionsSection";
 import { SettingsPreviewSection } from "@/features/profile/sections/SettingsPreviewSection";
 
-export const Route = createFileRoute("/profile")({
+export const Route = createFileRoute("/_authenticated/profile")({
   head: () => ({
     meta: [
       { title: "Profil — VITALA" },

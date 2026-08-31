@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import type { QueryClient } from "@tanstack/react-query";
 import { PersistedQueryProvider } from "@/lib/query-persist";
+import { Toaster } from "@/components/ui/sonner";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Outlet,
   Link,
@@ -114,11 +117,22 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    const { data } = supabase.auth.onAuthStateChange((event) => {
+      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
+      router.invalidate();
+      if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
+    });
+    return () => data.subscription.unsubscribe();
+  }, [router, queryClient]);
 
   return (
     <PersistedQueryProvider client={queryClient}>
       <PrefsProvider>
         <Outlet />
+        <Toaster />
       </PrefsProvider>
     </PersistedQueryProvider>
   );

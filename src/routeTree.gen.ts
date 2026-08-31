@@ -13,14 +13,15 @@ import { Route as TrustRouteImport } from './routes/trust'
 import { Route as TalentsRouteImport } from './routes/talents'
 import { Route as ScanRouteImport } from './routes/scan'
 import { Route as RadarRouteImport } from './routes/radar'
-import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MessagesRouteImport } from './routes/messages'
 import { Route as FlashRouteImport } from './routes/flash'
 import { Route as CreationRouteImport } from './routes/creation'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAssistantRouteImport } from './routes/api/assistant'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 
 const TrustRoute = TrustRouteImport.update({
   id: '/trust',
@@ -40,11 +41,6 @@ const ScanRoute = ScanRouteImport.update({
 const RadarRoute = RadarRouteImport.update({
   id: '/radar',
   path: '/radar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProfileRoute = ProfileRouteImport.update({
-  id: '/profile',
-  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotificationsRoute = NotificationsRouteImport.update({
@@ -72,6 +68,10 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -82,6 +82,11 @@ const ApiAssistantRoute = ApiAssistantRouteImport.update({
   path: '/api/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -90,11 +95,11 @@ export interface FileRoutesByFullPath {
   '/flash': typeof FlashRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
-  '/profile': typeof ProfileRoute
   '/radar': typeof RadarRoute
   '/scan': typeof ScanRoute
   '/talents': typeof TalentsRoute
   '/trust': typeof TrustRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRoutesByTo {
@@ -104,26 +109,27 @@ export interface FileRoutesByTo {
   '/flash': typeof FlashRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
-  '/profile': typeof ProfileRoute
   '/radar': typeof RadarRoute
   '/scan': typeof ScanRoute
   '/talents': typeof TalentsRoute
   '/trust': typeof TrustRoute
+  '/profile': typeof AuthenticatedProfileRoute
   '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/creation': typeof CreationRoute
   '/flash': typeof FlashRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
-  '/profile': typeof ProfileRoute
   '/radar': typeof RadarRoute
   '/scan': typeof ScanRoute
   '/talents': typeof TalentsRoute
   '/trust': typeof TrustRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRouteTypes {
@@ -135,11 +141,11 @@ export interface FileRouteTypes {
     | '/flash'
     | '/messages'
     | '/notifications'
-    | '/profile'
     | '/radar'
     | '/scan'
     | '/talents'
     | '/trust'
+    | '/profile'
     | '/api/assistant'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -149,36 +155,37 @@ export interface FileRouteTypes {
     | '/flash'
     | '/messages'
     | '/notifications'
-    | '/profile'
     | '/radar'
     | '/scan'
     | '/talents'
     | '/trust'
+    | '/profile'
     | '/api/assistant'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/auth'
     | '/creation'
     | '/flash'
     | '/messages'
     | '/notifications'
-    | '/profile'
     | '/radar'
     | '/scan'
     | '/talents'
     | '/trust'
+    | '/_authenticated/profile'
     | '/api/assistant'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   CreationRoute: typeof CreationRoute
   FlashRoute: typeof FlashRoute
   MessagesRoute: typeof MessagesRoute
   NotificationsRoute: typeof NotificationsRoute
-  ProfileRoute: typeof ProfileRoute
   RadarRoute: typeof RadarRoute
   ScanRoute: typeof ScanRoute
   TalentsRoute: typeof TalentsRoute
@@ -216,13 +223,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RadarRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/profile': {
-      id: '/profile'
-      path: '/profile'
-      fullPath: '/profile'
-      preLoaderRoute: typeof ProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/notifications': {
       id: '/notifications'
       path: '/notifications'
@@ -258,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -272,17 +279,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   CreationRoute: CreationRoute,
   FlashRoute: FlashRoute,
   MessagesRoute: MessagesRoute,
   NotificationsRoute: NotificationsRoute,
-  ProfileRoute: ProfileRoute,
   RadarRoute: RadarRoute,
   ScanRoute: ScanRoute,
   TalentsRoute: TalentsRoute,
