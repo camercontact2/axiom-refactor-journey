@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      flashes: {
+        Row: {
+          author_id: string
+          city: string | null
+          created_at: string
+          description: string | null
+          duration: string
+          expires_at: string | null
+          id: string
+          moderation_reason: string | null
+          moderation_status: string
+          price: string | null
+          status: string
+          title: string
+          type: string
+          updated_at: string
+          views: number
+        }
+        Insert: {
+          author_id: string
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          duration?: string
+          expires_at?: string | null
+          id?: string
+          moderation_reason?: string | null
+          moderation_status?: string
+          price?: string | null
+          status?: string
+          title: string
+          type?: string
+          updated_at?: string
+          views?: number
+        }
+        Update: {
+          author_id?: string
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          duration?: string
+          expires_at?: string | null
+          id?: string
+          moderation_reason?: string | null
+          moderation_status?: string
+          price?: string | null
+          status?: string
+          title?: string
+          type?: string
+          updated_at?: string
+          views?: number
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
