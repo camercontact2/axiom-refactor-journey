@@ -12,7 +12,7 @@ import { RecentSearches } from "@/features/radar/components/RecentSearches";
 import { ResultsView } from "@/features/radar/components/ResultsView";
 import { SmartSuggestionsSection } from "@/features/radar/components/SmartSuggestionsSection";
 
-export const Route = createFileRoute("/radar")({
+export const Route = createFileRoute("/_authenticated/radar")({
   head: () => ({
     meta: [
       { title: "Radar — Intelligence · VITALA" },

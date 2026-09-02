@@ -14,7 +14,7 @@ import { RecentFlashes } from "@/features/flash/components/RecentFlashes";
 import { ScanConfig } from "@/features/flash/components/ScanConfig";
 import { ScanResults } from "@/features/flash/components/ScanResults";
 
-export const Route = createFileRoute("/flash")({
+export const Route = createFileRoute("/_authenticated/flash")({
   head: () => ({ meta: [{ title: "Flash — Publish in seconds" }] }),
   component: FlashPage,
 });

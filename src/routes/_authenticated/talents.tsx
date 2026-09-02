@@ -13,7 +13,7 @@ import { PartagerSection } from "@/features/talents/sections/PartagerSection";
 import { TestimonialsSection } from "@/features/talents/sections/TestimonialsSection";
 import { FooterNavSection } from "@/features/talents/sections/FooterNavSection";
 
-export const Route = createFileRoute("/talents")({
+export const Route = createFileRoute("/_authenticated/talents")({
   head: () => ({
     meta: [
       { title: "Talents & Savoir Vivant — VITALA" },

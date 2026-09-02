@@ -8,7 +8,7 @@ import { ArrowUpRight, Clock, Eye, Filter, MapPin, MessageCircle, ScanSearch, Se
 import { FILTERS, FEED, NEARBY, TRENDING, URGENT, SUGGESTIONS } from "@/features/scan/data";
 import { StatusBadge } from "@/features/scan/components/StatusBadge";
 
-export const Route = createFileRoute("/scan")({
+export const Route = createFileRoute("/_authenticated/scan")({
   head: () => ({
     meta: [
       { title: "Scan — VITALA" },
