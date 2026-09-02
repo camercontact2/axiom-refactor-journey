@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Check, ChevronLeft, ChevronRight, Clock, Eye, MapPin, Rocket, Tag, Users, X } from "lucide-react";
 import { FlashType, Mode, TYPES, DURATIONS } from "../data";
+import { toast } from "sonner";
+import { useCreateFlash } from "../hooks/useFlashes";
 import { Field } from "./Field";
 import { MediaUpload } from "./MediaUpload";
 import { PreviewCard } from "./PreviewCard";
@@ -20,6 +22,22 @@ export function CreateSheet({ onClose }: { onClose: () => void }) {
   const [visibility, setVisibility] = useState<"public" | "limited">("public");
   const [boost, setBoost] = useState(false);
   const [image, setImage] = useState<string | null>(null);
+
+  const create = useCreateFlash();
+
+  const publish = () => {
+    create.mutate(
+      { type, title, description: desc, price, city: location, duration },
+      {
+        onSuccess: () => {
+          toast.success("Flash publié");
+          onClose();
+        },
+        onError: (e: unknown) =>
+          toast.error(e instanceof Error ? e.message : "Publication impossible"),
+      },
+    );
+  };
 
   const t = useMemo(() => TYPES.find((x) => x.id === type)!, [type]);
   const canNext = title.trim().length > 1;
@@ -265,14 +283,16 @@ export function CreateSheet({ onClose }: { onClose: () => void }) {
             </div>
 
             <button
-              onClick={onClose}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-[15px] font-semibold text-[oklch(0.18_0.02_60)] transition-all active:scale-[0.98]"
+              onClick={publish}
+              disabled={create.isPending || title.trim().length < 3}
+              className="flex w-full items-center justify-center gap-2 rounded-2xl py-3.5 text-[15px] font-semibold text-[oklch(0.18_0.02_60)] transition-all active:scale-[0.98] disabled:opacity-50"
               style={{ background: "var(--gradient-flash)", boxShadow: "var(--shadow-glow-flash)" }}
             >
-              <Check className="h-4 w-4" /> Publier le Flash
+              <Check className="h-4 w-4" aria-hidden="true" />
+              {create.isPending ? "Publication…" : "Publier le Flash"}
             </button>
             <p className="text-center text-[11px] text-muted-foreground">
-              Aperçu uniquement — aucune donnée envoyée.
+              Ton Flash sera visible immédiatement par la communauté.
             </p>
           </div>
         )}

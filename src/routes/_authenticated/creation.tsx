@@ -15,7 +15,7 @@ import { NouveauProjetSection } from "@/features/creation/sections/NouveauProjet
 import { ResourcesSection } from "@/features/creation/sections/ResourcesSection";
 import { FooterNavSection } from "@/features/creation/sections/FooterNavSection";
 
-export const Route = createFileRoute("/creation")({
+export const Route = createFileRoute("/_authenticated/creation")({
   head: () => ({
     meta: [
       { title: "Espace de création — VITALA" },

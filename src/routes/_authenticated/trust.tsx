@@ -12,7 +12,7 @@ import { SafetySupportSection } from "@/features/trust/sections/SafetySupportSec
 import { TransparencyInfoPanelSection } from "@/features/trust/sections/TransparencyInfoPanelSection";
 import { TrustActionButtonsSection } from "@/features/trust/sections/TrustActionButtonsSection";
 
-export const Route = createFileRoute("/trust")({
+export const Route = createFileRoute("/_authenticated/trust")({
   head: () => ({
     meta: [
       { title: "Trust — VITALA" },
