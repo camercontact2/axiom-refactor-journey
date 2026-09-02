@@ -22,6 +22,7 @@ import { Route as AuthenticatedRadarRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as AuthenticatedFlashRouteImport } from './routes/_authenticated/flash'
 import { Route as AuthenticatedCreationRouteImport } from './routes/_authenticated/creation'
+import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
@@ -87,12 +88,18 @@ const AuthenticatedCreationRoute = AuthenticatedCreationRouteImport.update({
   path: '/creation',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/creation': typeof AuthenticatedCreationRoute
   '/flash': typeof AuthenticatedFlashRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
+  '/admin': typeof AuthenticatedAdminRoute
   '/creation': typeof AuthenticatedCreationRoute
   '/flash': typeof AuthenticatedFlashRoute
   '/profile': typeof AuthenticatedProfileRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/creation': typeof AuthenticatedCreationRoute
   '/_authenticated/flash': typeof AuthenticatedFlashRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
@@ -139,6 +148,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/messages'
     | '/notifications'
+    | '/admin'
     | '/creation'
     | '/flash'
     | '/profile'
@@ -153,6 +163,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/messages'
     | '/notifications'
+    | '/admin'
     | '/creation'
     | '/flash'
     | '/profile'
@@ -168,6 +179,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/messages'
     | '/notifications'
+    | '/_authenticated/admin'
     | '/_authenticated/creation'
     | '/_authenticated/flash'
     | '/_authenticated/profile'
@@ -280,10 +292,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCreationRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedCreationRoute: typeof AuthenticatedCreationRoute
   AuthenticatedFlashRoute: typeof AuthenticatedFlashRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
@@ -294,6 +314,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedCreationRoute: AuthenticatedCreationRoute,
   AuthenticatedFlashRoute: AuthenticatedFlashRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
