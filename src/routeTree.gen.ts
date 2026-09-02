@@ -9,40 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TrustRouteImport } from './routes/trust'
-import { Route as TalentsRouteImport } from './routes/talents'
-import { Route as ScanRouteImport } from './routes/scan'
-import { Route as RadarRouteImport } from './routes/radar'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as MessagesRouteImport } from './routes/messages'
-import { Route as FlashRouteImport } from './routes/flash'
-import { Route as CreationRouteImport } from './routes/creation'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAssistantRouteImport } from './routes/api/assistant'
+import { Route as AuthenticatedTrustRouteImport } from './routes/_authenticated/trust'
+import { Route as AuthenticatedTalentsRouteImport } from './routes/_authenticated/talents'
+import { Route as AuthenticatedScanRouteImport } from './routes/_authenticated/scan'
+import { Route as AuthenticatedRadarRouteImport } from './routes/_authenticated/radar'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedFlashRouteImport } from './routes/_authenticated/flash'
+import { Route as AuthenticatedCreationRouteImport } from './routes/_authenticated/creation'
 
-const TrustRoute = TrustRouteImport.update({
-  id: '/trust',
-  path: '/trust',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TalentsRoute = TalentsRouteImport.update({
-  id: '/talents',
-  path: '/talents',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScanRoute = ScanRouteImport.update({
-  id: '/scan',
-  path: '/scan',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RadarRoute = RadarRouteImport.update({
-  id: '/radar',
-  path: '/radar',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
@@ -51,16 +31,6 @@ const NotificationsRoute = NotificationsRouteImport.update({
 const MessagesRoute = MessagesRouteImport.update({
   id: '/messages',
   path: '/messages',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FlashRoute = FlashRouteImport.update({
-  id: '/flash',
-  path: '/flash',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CreationRoute = CreationRouteImport.update({
-  id: '/creation',
-  path: '/creation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -82,38 +52,68 @@ const ApiAssistantRoute = ApiAssistantRouteImport.update({
   path: '/api/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedTrustRoute = AuthenticatedTrustRouteImport.update({
+  id: '/trust',
+  path: '/trust',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedTalentsRoute = AuthenticatedTalentsRouteImport.update({
+  id: '/talents',
+  path: '/talents',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedScanRoute = AuthenticatedScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedRadarRoute = AuthenticatedRadarRouteImport.update({
+  id: '/radar',
+  path: '/radar',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedFlashRoute = AuthenticatedFlashRouteImport.update({
+  id: '/flash',
+  path: '/flash',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCreationRoute = AuthenticatedCreationRouteImport.update({
+  id: '/creation',
+  path: '/creation',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/creation': typeof CreationRoute
-  '/flash': typeof FlashRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
-  '/radar': typeof RadarRoute
-  '/scan': typeof ScanRoute
-  '/talents': typeof TalentsRoute
-  '/trust': typeof TrustRoute
+  '/creation': typeof AuthenticatedCreationRoute
+  '/flash': typeof AuthenticatedFlashRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/radar': typeof AuthenticatedRadarRoute
+  '/scan': typeof AuthenticatedScanRoute
+  '/talents': typeof AuthenticatedTalentsRoute
+  '/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
-  '/creation': typeof CreationRoute
-  '/flash': typeof FlashRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
-  '/radar': typeof RadarRoute
-  '/scan': typeof ScanRoute
-  '/talents': typeof TalentsRoute
-  '/trust': typeof TrustRoute
+  '/creation': typeof AuthenticatedCreationRoute
+  '/flash': typeof AuthenticatedFlashRoute
   '/profile': typeof AuthenticatedProfileRoute
+  '/radar': typeof AuthenticatedRadarRoute
+  '/scan': typeof AuthenticatedScanRoute
+  '/talents': typeof AuthenticatedTalentsRoute
+  '/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRoutesById {
@@ -121,15 +121,15 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
-  '/creation': typeof CreationRoute
-  '/flash': typeof FlashRoute
   '/messages': typeof MessagesRoute
   '/notifications': typeof NotificationsRoute
-  '/radar': typeof RadarRoute
-  '/scan': typeof ScanRoute
-  '/talents': typeof TalentsRoute
-  '/trust': typeof TrustRoute
+  '/_authenticated/creation': typeof AuthenticatedCreationRoute
+  '/_authenticated/flash': typeof AuthenticatedFlashRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/radar': typeof AuthenticatedRadarRoute
+  '/_authenticated/scan': typeof AuthenticatedScanRoute
+  '/_authenticated/talents': typeof AuthenticatedTalentsRoute
+  '/_authenticated/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
 }
 export interface FileRouteTypes {
@@ -137,44 +137,44 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
-    | '/creation'
-    | '/flash'
     | '/messages'
     | '/notifications'
+    | '/creation'
+    | '/flash'
+    | '/profile'
     | '/radar'
     | '/scan'
     | '/talents'
     | '/trust'
-    | '/profile'
     | '/api/assistant'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
-    | '/creation'
-    | '/flash'
     | '/messages'
     | '/notifications'
+    | '/creation'
+    | '/flash'
+    | '/profile'
     | '/radar'
     | '/scan'
     | '/talents'
     | '/trust'
-    | '/profile'
     | '/api/assistant'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
-    | '/creation'
-    | '/flash'
     | '/messages'
     | '/notifications'
-    | '/radar'
-    | '/scan'
-    | '/talents'
-    | '/trust'
+    | '/_authenticated/creation'
+    | '/_authenticated/flash'
     | '/_authenticated/profile'
+    | '/_authenticated/radar'
+    | '/_authenticated/scan'
+    | '/_authenticated/talents'
+    | '/_authenticated/trust'
     | '/api/assistant'
   fileRoutesById: FileRoutesById
 }
@@ -182,47 +182,13 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
-  CreationRoute: typeof CreationRoute
-  FlashRoute: typeof FlashRoute
   MessagesRoute: typeof MessagesRoute
   NotificationsRoute: typeof NotificationsRoute
-  RadarRoute: typeof RadarRoute
-  ScanRoute: typeof ScanRoute
-  TalentsRoute: typeof TalentsRoute
-  TrustRoute: typeof TrustRoute
   ApiAssistantRoute: typeof ApiAssistantRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/trust': {
-      id: '/trust'
-      path: '/trust'
-      fullPath: '/trust'
-      preLoaderRoute: typeof TrustRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/talents': {
-      id: '/talents'
-      path: '/talents'
-      fullPath: '/talents'
-      preLoaderRoute: typeof TalentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scan': {
-      id: '/scan'
-      path: '/scan'
-      fullPath: '/scan'
-      preLoaderRoute: typeof ScanRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/radar': {
-      id: '/radar'
-      path: '/radar'
-      fullPath: '/radar'
-      preLoaderRoute: typeof RadarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/notifications': {
       id: '/notifications'
       path: '/notifications'
@@ -235,20 +201,6 @@ declare module '@tanstack/react-router' {
       path: '/messages'
       fullPath: '/messages'
       preLoaderRoute: typeof MessagesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/flash': {
-      id: '/flash'
-      path: '/flash'
-      fullPath: '/flash'
-      preLoaderRoute: typeof FlashRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/creation': {
-      id: '/creation'
-      path: '/creation'
-      fullPath: '/creation'
-      preLoaderRoute: typeof CreationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -279,6 +231,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/trust': {
+      id: '/_authenticated/trust'
+      path: '/trust'
+      fullPath: '/trust'
+      preLoaderRoute: typeof AuthenticatedTrustRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/talents': {
+      id: '/_authenticated/talents'
+      path: '/talents'
+      fullPath: '/talents'
+      preLoaderRoute: typeof AuthenticatedTalentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/scan': {
+      id: '/_authenticated/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof AuthenticatedScanRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/radar': {
+      id: '/_authenticated/radar'
+      path: '/radar'
+      fullPath: '/radar'
+      preLoaderRoute: typeof AuthenticatedRadarRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/profile': {
       id: '/_authenticated/profile'
       path: '/profile'
@@ -286,15 +266,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/flash': {
+      id: '/_authenticated/flash'
+      path: '/flash'
+      fullPath: '/flash'
+      preLoaderRoute: typeof AuthenticatedFlashRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/creation': {
+      id: '/_authenticated/creation'
+      path: '/creation'
+      fullPath: '/creation'
+      preLoaderRoute: typeof AuthenticatedCreationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedCreationRoute: typeof AuthenticatedCreationRoute
+  AuthenticatedFlashRoute: typeof AuthenticatedFlashRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedRadarRoute: typeof AuthenticatedRadarRoute
+  AuthenticatedScanRoute: typeof AuthenticatedScanRoute
+  AuthenticatedTalentsRoute: typeof AuthenticatedTalentsRoute
+  AuthenticatedTrustRoute: typeof AuthenticatedTrustRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedCreationRoute: AuthenticatedCreationRoute,
+  AuthenticatedFlashRoute: AuthenticatedFlashRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedRadarRoute: AuthenticatedRadarRoute,
+  AuthenticatedScanRoute: AuthenticatedScanRoute,
+  AuthenticatedTalentsRoute: AuthenticatedTalentsRoute,
+  AuthenticatedTrustRoute: AuthenticatedTrustRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -304,14 +310,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
-  CreationRoute: CreationRoute,
-  FlashRoute: FlashRoute,
   MessagesRoute: MessagesRoute,
   NotificationsRoute: NotificationsRoute,
-  RadarRoute: RadarRoute,
-  ScanRoute: ScanRoute,
-  TalentsRoute: TalentsRoute,
-  TrustRoute: TrustRoute,
   ApiAssistantRoute: ApiAssistantRoute,
 }
 export const routeTree = rootRouteImport
