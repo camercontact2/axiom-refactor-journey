@@ -28,47 +28,22 @@ export const ANALYSIS_STEPS = [
   { icon: Sparkles, label: "Émergence des opportunités", hint: "Résultats contextuels" },
 ];
 
-export const MOCK_RESULTS = [
-  {
-    id: "1",
-    name: "Amélie Laurent",
-    role: "Product Designer · Mentor",
-    avatar: "AL",
-    location: "Paris · 2 km",
-    trust: 96,
-    compatibility: 94,
-    available: true,
-    tags: ["Design systems", "Mentorat", "Calme"],
-    note: "Style de collaboration proche du tien. Activité récente forte.",
-    gradient: "linear-gradient(135deg, oklch(0.72 0.2 320), oklch(0.65 0.22 280))",
-  },
-  {
-    id: "2",
-    name: "Yacine Boudiaf",
-    role: "Full-Stack Engineer",
-    avatar: "YB",
-    location: "Lyon · Remote",
-    trust: 88,
-    compatibility: 89,
-    available: true,
-    tags: ["React", "Edge", "Open-source"],
-    note: "Contribue régulièrement à l'écosystème. Communication directe.",
-    gradient: "linear-gradient(135deg, oklch(0.78 0.18 200), oklch(0.7 0.2 240))",
-  },
-  {
-    id: "3",
-    name: "Studio Hévéa",
-    role: "Collectif créatif · 4 humains",
-    avatar: "SH",
-    location: "Marseille",
-    trust: 92,
-    compatibility: 86,
-    available: false,
-    tags: ["Branding", "Motion", "Stratégie"],
-    note: "Expertise complémentaire. Disponibilité dans 2 semaines.",
-    gradient: "linear-gradient(135deg, oklch(0.78 0.18 155), oklch(0.7 0.18 180))",
-  },
-];
+export type RadarMatch = {
+  id: string;
+  name: string;
+  role: string;
+  avatar: string;
+  location: string;
+  trust: number;
+  compatibility: number;
+  available: boolean;
+  tags: string[];
+  note: string;
+  gradient: string;
+};
+
+/** Resultats reels du radar. Vide tant que l'ecosysteme n'a rien remonte. */
+export const MOCK_RESULTS: RadarMatch[] = [];
 
 export const ASSISTANT_HINTS = [
   "Préciser le niveau d'expérience ?",
@@ -76,17 +51,11 @@ export const ASSISTANT_HINTS = [
   "Filtrer par disponibilité immédiate ?",
 ];
 
-export const VEILLES = [
-  { id: "v1", label: "Designer freelance Paris", matches: 3, fresh: "il y a 2 h", color: "var(--radar)" },
-  { id: "v2", label: "Co-fondateur tech, mission longue", matches: 1, fresh: "hier", color: "var(--trust)" },
-];
+/** Veilles reellement enregistrees par l'utilisateur. */
+export const VEILLES: { id: string; label: string; matches: number; fresh: string; color: string }[] = [];
 
-export const RECENT_SEARCHES = [
-  "Designer freelance dispo cette semaine",
-  "Mentor produit early-stage",
-  "Studio motion design Marseille",
-  "Coach voix podcast",
-];
+/** Recherches recentes reelles de l'utilisateur. */
+export const RECENT_SEARCHES: string[] = [];
 
 export const SUGGESTIONS = [
   {
