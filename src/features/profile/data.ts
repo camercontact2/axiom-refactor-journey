@@ -29,13 +29,8 @@ export const LEVELS = [
   { key: "pro", label: "Pro", desc: "Activité régulière" },
 ];
 
-export const ACTIVITY = [
-  { icon: Zap, color: "var(--flash)", title: "Vente Flash — Vélo urbain", meta: "Il y a 2 h", tag: "Publié" },
-  { icon: Radar, color: "var(--radar)", title: "Besoin — Cours de guitare", meta: "Hier", tag: "Actif" },
-  { icon: MessageCircle, color: "var(--scan)", title: "Réponse à Marc D.", meta: "Hier", tag: "Échange" },
-  { icon: CheckCircle2, color: "var(--trust)", title: "Vérification email", meta: "3 jours", tag: "Validé" },
-  { icon: ScanSearch, color: "var(--scan)", title: "A consulté 4 services", meta: "Cette semaine", tag: "Découverte" },
-];
+/** Activite reelle de l'utilisateur. */
+export const ACTIVITY: { icon: typeof Zap; color: string; title: string; meta: string; tag: string }[] = [];
 
 export const TRUST_ITEMS = [
   { label: "Identité", value: 100 },
