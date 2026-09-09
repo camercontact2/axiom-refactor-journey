@@ -89,7 +89,7 @@ export const STUDIOS = [
 ];
 
 /** Contenu reel des utilisateurs. Vide tant que rien n'a ete publie. */
-export const PROJECTS: { title: string; by: string; members: number; status: string; needs?: string[]; summary?: string; steps?: string[] }[] = [];
+export const PROJECTS: { title: string; by: string; members: number; status: string; needs: string[]; summary: string; steps: string[] }[] = [];
 
 export const LIVE_ITEMS = [
   { icon: <Flame className="h-3 w-3" />, text: "Léna cherche un batteur pour ce week-end" },
