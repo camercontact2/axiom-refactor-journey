@@ -1,32 +1,20 @@
 /**
  * Donnees du domaine "trust".
- * Contenu affiche par les ecrans : titres, libelles, listes de demo.
- * Modifier ici pour changer les textes/valeurs, sans toucher a l'interface.
+ * Aucune donnee inventee : les listes reelles sont vides tant que
+ * l'utilisateur n'a rien verifie / recu. Les catalogues ci-dessous
+ * decrivent ce qui EXISTE dans le produit (badges, criteres), pas des faits.
  */
-import { Activity, Award, BadgeCheck, CheckCircle2, Clock, Eye, FileCheck, ImageIcon, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { Activity, Award, BadgeCheck, CheckCircle2, FileCheck, ShieldCheck } from "lucide-react";
 
-export const PROFILE = {
-  name: "Atelier Léa Moreau",
-  handle: "@lea.atelier",
-  role: "Service de couture · Paris 11e",
-  score: 92,
-  status: "Fiable",
-};
-
-export const SCORES = [
-  { label: "Fiabilité", value: 94 },
-  { label: "Activité", value: 88 },
-  { label: "Transparence", value: 96 },
-  { label: "Réactivité", value: 90 },
+/** Criteres de verification disponibles + etat reel (aucun valide au depart). */
+export const VERIFICATIONS: { label: string; icon: typeof BadgeCheck; ok: boolean }[] = [
+  { label: "Identité vérifiée", icon: BadgeCheck, ok: false },
+  { label: "Activité confirmée", icon: CheckCircle2, ok: false },
+  { label: "Informations complètes", icon: FileCheck, ok: false },
+  { label: "Historique actif", icon: Activity, ok: false },
 ];
 
-export const VERIFICATIONS = [
-  { label: "Identité vérifiée", icon: BadgeCheck, ok: true },
-  { label: "Activité confirmée", icon: CheckCircle2, ok: true },
-  { label: "Informations complètes", icon: FileCheck, ok: true },
-  { label: "Historique actif", icon: Activity, ok: true },
-];
-
+/** Catalogue des badges que l'on peut obtenir. */
 export const BADGES = [
   { label: "Verified", icon: BadgeCheck },
   { label: "Active", icon: Activity },
@@ -34,36 +22,17 @@ export const BADGES = [
   { label: "Professional", icon: Award },
 ];
 
-export const INDICATORS = [
-  { label: "Réponse moyenne", value: "< 1h", pct: 92, icon: Zap },
-  { label: "Satisfaction", value: "98%", pct: 98, icon: Sparkles },
-  { label: "Transparence infos", value: "Complète", pct: 96, icon: Eye },
-  { label: "Activité récente", value: "Aujourd'hui", pct: 88, icon: Clock },
-];
+/** Indicateurs reels. Vides tant qu'il n'y a pas assez d'activite. */
+export const INDICATORS: { label: string; value: string; pct: number; icon: typeof Activity }[] = [];
 
-export const FEEDBACKS = [
-  { name: "Maya R.", text: "Travail soigné, communication parfaite.", tags: ["professionnel", "clair"] },
-  { name: "Tom B.", text: "Très rapide, exactement ce que je cherchais.", tags: ["rapide", "fiable"] },
-  { name: "Inès D.", text: "Conseils précis et délais respectés.", tags: ["professionnel", "fiable"] },
-];
+/** Retours reels recus par l'utilisateur. */
+export const FEEDBACKS: { name: string; text: string; tags: string[] }[] = [];
 
-export const PROOFS = [
-  { label: "Certification métier", icon: Award },
-  { label: "Pièce d'identité", icon: BadgeCheck },
-  { label: "Atelier — photo", icon: ImageIcon },
-  { label: "Assurance pro", icon: FileCheck },
-];
+/** Preuves reellement deposees par l'utilisateur. */
+export const PROOFS: { label: string; icon: typeof Award }[] = [];
 
-export const TIMELINE = [
-  { when: "Aujourd'hui", text: "Profil mis à jour" },
-  { when: "Hier", text: "Nouvelle interaction confirmée" },
-  { when: "3 j", text: "Vérification d'identité renouvelée" },
-  { when: "1 sem", text: "Certification ajoutée" },
-];
+/** Historique reel du compte. */
+export const TIMELINE: { when: string; text: string }[] = [];
 
-export const TRANSPARENCY = [
-  { label: "Disponibilité", value: "Lun–Sam" },
-  { label: "Horaires", value: "9h – 19h" },
-  { label: "Délai moyen", value: "2 jours" },
-  { label: "Politique", value: "Retour 14j" },
-];
+/** Informations publiques reellement renseignees par l'utilisateur. */
+export const TRANSPARENCY: { label: string; value: string }[] = [];

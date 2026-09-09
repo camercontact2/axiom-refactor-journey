@@ -11,7 +11,7 @@ export const STUDIOS = [
   {
     icon: PenTool,
     label: "Écriture",
-    count: 12,
+    count: 0,
     hint: "Récits, poésie, BD",
     summary:
       "Tu poses des mots ? Ici on écrit à plusieurs, on se relit, on publie des fanzines et des recueils.",
@@ -24,7 +24,7 @@ export const STUDIOS = [
   {
     icon: Palette,
     label: "Arts visuels",
-    count: 18,
+    count: 0,
     hint: "Illustration, peinture",
     summary:
       "Illustrateur·rices, peintres, graphistes : monte un projet, partage tes WIP, trouve un binôme.",
@@ -37,7 +37,7 @@ export const STUDIOS = [
   {
     icon: Camera,
     label: "Photo",
-    count: 9,
+    count: 0,
     hint: "Reportage, portraits",
     summary:
       "Du reportage de quartier aux séries portrait : trouve modèles, lieux et regards complices.",
@@ -50,7 +50,7 @@ export const STUDIOS = [
   {
     icon: Music2,
     label: "Musique",
-    count: 14,
+    count: 0,
     hint: "Compo, live, prod",
     summary:
       "Compose, enregistre, joue. Trouve un·e batteur·euse, un·e ingé son ou juste un studio dispo.",
@@ -63,7 +63,7 @@ export const STUDIOS = [
   {
     icon: Film,
     label: "Vidéo",
-    count: 7,
+    count: 0,
     hint: "Court-métrage, doc",
     summary:
       "Court-métrages, docus, capsules : monte une équipe régie, son, image et tourne près de chez toi.",
@@ -76,7 +76,7 @@ export const STUDIOS = [
   {
     icon: Lightbulb,
     label: "Idées",
-    count: 23,
+    count: 0,
     hint: "Concepts, prototypes",
     summary:
       "Un concept en tête mais pas encore d'équipe ? Pose-le ici, regarde qui mord.",
@@ -88,50 +88,8 @@ export const STUDIOS = [
   },
 ];
 
-export const PROJECTS = [
-  {
-    title: "Fanzine collectif — N°3",
-    by: "Studio Atelier 9",
-    members: 6,
-    status: "Ouvert",
-    needs: ["Illustrateur·rice", "Relecture"],
-    summary:
-      "Troisième numéro du fanzine du quartier : 32 pages, thème « voisinages ». Sortie papier + numérique en mars.",
-    steps: [
-      "Lecture du brief + appel à contributions.",
-      "Atelier maquette commune un samedi.",
-      "Impression locale + lancement en librairie.",
-    ],
-  },
-  {
-    title: "EP acoustique — sessions home",
-    by: "Léna B.",
-    members: 2,
-    status: "Recrute",
-    needs: ["Batteur·euse", "Mix"],
-    summary:
-      "5 morceaux folk enregistrés en home studio. Cherche batteur·euse doux·ce et un·e ingé mix sensible.",
-    steps: [
-      "Écoute des démos partagées en privé.",
-      "Une répète + une session d'enregistrement.",
-      "Mix collaboratif, sortie sur les plateformes.",
-    ],
-  },
-  {
-    title: "Court-métrage — quartier vivant",
-    by: "Collectif Plein Cadre",
-    members: 8,
-    status: "En tournage",
-    needs: ["Régie", "Son"],
-    summary:
-      "Fiction de 15 min sur une journée dans un marché de quartier. Tournage en cours, postprod prévue cet été.",
-    steps: [
-      "Reprise des tournages les week-ends.",
-      "Postprod son/image en juillet.",
-      "Projection locale + festivals d'automne.",
-    ],
-  },
-];
+/** Contenu reel des utilisateurs. Vide tant que rien n'a ete publie. */
+export const PROJECTS: { title: string; by: string; members: number; status: string; needs: string[]; summary: string; steps: string[] }[] = [];
 
 export const LIVE_ITEMS = [
   { icon: <Flame className="h-3 w-3" />, text: "Léna cherche un batteur pour ce week-end" },
@@ -183,38 +141,8 @@ export const STEPS = [
   },
 ];
 
-export const INSPIRATIONS = [
-  {
-    tag: "Fanzine",
-    title: "Voix du marché",
-    by: "Atelier 9 · Marseille",
-    quote: "On a édité 200 exemplaires en 3 semaines.",
-  },
-  {
-    tag: "Musique",
-    title: "Nuit kora & beats",
-    by: "Sékou × Yann · Lyon",
-    quote: "Rencontre dans un cercle, EP six mois plus tard.",
-  },
-  {
-    tag: "Photo",
-    title: "Portraits d'immeuble",
-    by: "Inès D. · Nantes",
-    quote: "12 voisins, 12 portraits, une expo dans le hall.",
-  },
-  {
-    tag: "Vidéo",
-    title: "Le dernier kiosque",
-    by: "Plein Cadre · Aubervilliers",
-    quote: "Doc de 8 min, primé au festival local.",
-  },
-  {
-    tag: "Écriture",
-    title: "Lettres au quartier",
-    by: "Collectif Plume",
-    quote: "Une lettre par semaine, lue à voix haute.",
-  },
-];
+/** Contenu reel des utilisateurs. Vide tant que rien n'a ete publie. */
+export const INSPIRATIONS: { tag: string; title: string; by: string; quote: string }[] = [];
 
 export const FAQ = [
   {

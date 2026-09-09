@@ -61,77 +61,18 @@ export const LIVE_ITEMS = [
 ];
 
 export const CATEGORIES = [
-  { label: "Artisanat", count: 42, icon: Palette, hint: "Bois, cuir, poterie, couture — tout ce qui se fait avec les mains." },
-  { label: "Musique", count: 28, icon: Sparkles, hint: "Instruments, chant, prod, traditions vivantes." },
-  { label: "Cuisine", count: 31, icon: Heart, hint: "Recettes du bled, street food, pâtisseries de famille." },
-  { label: "Langues", count: 19, icon: BookOpen, hint: "Wolof, créole, arabe, anglais — apprends à la cool." },
-  { label: "Bien-être", count: 24, icon: ShieldCheck, hint: "Yoga, massages, plantes, soins traditionnels." },
-  { label: "Nature & jardin", count: 17, icon: Compass, hint: "Permaculture, balcons vivants, cueillette urbaine." },
-  { label: "Sports doux", count: 14, icon: Users, hint: "Marche, danse, qi gong, mouvement libre." },
-  { label: "Récits & mémoire", count: 9, icon: BookOpen, hint: "Contes, histoires de famille, mémoire du quartier." },
+  { label: "Artisanat", count: 0, icon: Palette, hint: "Bois, cuir, poterie, couture — tout ce qui se fait avec les mains." },
+  { label: "Musique", count: 0, icon: Sparkles, hint: "Instruments, chant, prod, traditions vivantes." },
+  { label: "Cuisine", count: 0, icon: Heart, hint: "Recettes du bled, street food, pâtisseries de famille." },
+  { label: "Langues", count: 0, icon: BookOpen, hint: "Wolof, créole, arabe, anglais — apprends à la cool." },
+  { label: "Bien-être", count: 0, icon: ShieldCheck, hint: "Yoga, massages, plantes, soins traditionnels." },
+  { label: "Nature & jardin", count: 0, icon: Compass, hint: "Permaculture, balcons vivants, cueillette urbaine." },
+  { label: "Sports doux", count: 0, icon: Users, hint: "Marche, danse, qi gong, mouvement libre." },
+  { label: "Récits & mémoire", count: 0, icon: BookOpen, hint: "Contes, histoires de famille, mémoire du quartier." },
 ];
 
-export const FEATURED = [
-  {
-    name: "Atelier poterie raku",
-    by: "Claire M.",
-    city: "Lyon",
-    tag: "Artisanat",
-    rating: 4.9,
-    when: "Sam. 14h",
-    duration: "2h",
-    price: "Libre — 15€ suggéré",
-    summary:
-      "Une après-midi les mains dans la terre avec Claire, céramiste depuis 12 ans. Tu repars avec ta pièce, cuite à la mode raku.",
-    steps: [
-      "Accueil thé & présentation des pièces.",
-      "Tournage / modelage guidé selon ton niveau.",
-      "Cuisson raku en direct — magie garantie.",
-    ],
-  },
-  {
-    name: "Cours de kora & griotique",
-    by: "Sékou D.",
-    city: "Marseille",
-    tag: "Musique",
-    rating: 4.8,
-    when: "Mer. 18h",
-    duration: "1h30",
-    price: "Solidaire",
-    summary:
-      "Sékou partage la kora et l'art du griot : un instrument, mille histoires. Aucun niveau requis, juste l'envie d'écouter.",
-    steps: [
-      "Démo et histoire de l'instrument.",
-      "Premières notes, posture, respiration.",
-      "On joue ensemble un motif traditionnel.",
-    ],
-  },
-  {
-    name: "Cuisine de mamie Jeanne",
-    by: "Jeanne R.",
-    city: "Aix",
-    tag: "Cuisine",
-    rating: 5.0,
-    when: "Dim. 11h",
-    duration: "3h + repas",
-    price: "12€ (ingrédients)",
-    summary:
-      "Jeanne, 78 ans, ouvre sa cuisine pour transmettre ses recettes provençales. On cuisine, on mange, on raconte.",
-    steps: [
-      "Marché ensemble au coin de la rue (optionnel).",
-      "Préparation à 4 mains des plats du jour.",
-      "On passe à table — c'est là que tout se dit.",
-    ],
-  },
-];
+/** Contenu reel des utilisateurs. Vide tant que rien n'a ete publie. */
+export const FEATURED: { name: string; by: string; city: string; tag: string; rating: number; when: string; duration: string; price: string; summary: string; steps: string[] }[] = [];
 
-export const TESTIMONIALS = [
-  {
-    quote: "Franchement, j'ai retrouvé le kiff de transmettre ce que ma mère m'a appris.",
-    author: "Awa, 62 ans — Toulouse",
-  },
-  {
-    quote: "Trois ateliers, trois belles rencontres. Et tout ça à 10 min de chez moi.",
-    author: "Hugo, 29 ans — Nantes",
-  },
-];
+/** Contenu reel des utilisateurs. Vide tant que rien n'a ete publie. */
+export const TESTIMONIALS: { quote: string; author: string }[] = [];
