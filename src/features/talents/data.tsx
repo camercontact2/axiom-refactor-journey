@@ -72,7 +72,7 @@ export const CATEGORIES = [
 ];
 
 /** Contenu reel des utilisateurs. Vide tant que rien n'a ete publie. */
-export const FEATURED: { name: string; by: string; city: string; tag: string; rating: number; when: string; duration: string; price: string; summary: string; steps: string[] }[] = []];
+export const FEATURED: { name: string; by: string; city: string; tag: string; rating: number; when: string; duration: string; price: string; summary: string; steps: string[] }[] = [];
 
 /** Contenu reel des utilisateurs. Vide tant que rien n'a ete publie. */
-export const TESTIMONIALS: { quote: string; author: string }[] = []];
+export const TESTIMONIALS: { quote: string; author: string }[] = [];
