@@ -3,6 +3,7 @@ import { RECENT_SEARCHES } from "../data";
 import { SectionHeader } from "./SectionHeader";
 
 export function RecentSearches({ onPick }: { onPick: (q: string) => void }) {
+  if (RECENT_SEARCHES.length === 0) return null;
   return (
     <section className="space-y-2">
       <SectionHeader icon={History} label="RECHERCHES RÉCENTES" />

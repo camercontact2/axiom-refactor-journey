@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { ArrowLeft, Bell, BellRing, Eye, Plus, Sparkles } from "lucide-react";
 import { MOCK_RESULTS, ASSISTANT_HINTS } from "../data";
 import { MatchCard } from "./MatchCard";
+import { EmptyGuide } from "@/components/ui-kit/EmptyGuide";
 
 export function ResultsView({
   need,
@@ -64,10 +65,18 @@ export function ResultsView({
             </div>
             <div className="flex-1">
               <p className="text-sm leading-relaxed">
-                J'ai exploré l'écosystème et identifié <span className="font-semibold" style={{ color: "var(--radar)" }}>3 humains compatibles</span> avec votre intention.
+                {MOCK_RESULTS.length > 0 ? (
+                  <>
+                    J'ai identifié <span className="font-semibold" style={{ color: "var(--radar)" }}>{MOCK_RESULTS.length} profil{MOCK_RESULTS.length > 1 ? "s" : ""} compatible{MOCK_RESULTS.length > 1 ? "s" : ""}</span> avec votre intention.
+                  </>
+                ) : (
+                  "Personne ne correspond encore à votre intention — c'est normal au lancement."
+                )}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
-                Classés par compatibilité, confiance et disponibilité.
+                {MOCK_RESULTS.length > 0
+                  ? "Classés par compatibilité, confiance et disponibilité."
+                  : "Activez la veille : vous serez prévenu dès qu'un profil compatible arrive."}
               </p>
             </div>
           </div>
@@ -95,12 +104,28 @@ export function ResultsView({
 
       {/* Results */}
       <section className="space-y-3">
-        <p className="px-1 text-xs uppercase tracking-[0.15em] text-muted-foreground/60">
-          Humains compatibles
-        </p>
-        {MOCK_RESULTS.map((r, i) => (
-          <MatchCard key={r.id} match={r} delay={i * 80} />
-        ))}
+        {MOCK_RESULTS.length === 0 ? (
+          <EmptyGuide
+            title="Aidez le Radar à vous trouver quelqu'un"
+            description="Les profils compatibles apparaîtront ici dès qu'ils rejoignent VITALA."
+            steps={[
+              "Activez la veille en haut à droite.",
+              "Précisez votre besoin (zone, délai, niveau).",
+              "Publiez un Flash pour être vu tout de suite.",
+            ]}
+            actions={[{ label: "Publier un Flash", to: "/flash" }]}
+            color="var(--radar)"
+          />
+        ) : (
+          <>
+            <p className="px-1 text-xs uppercase tracking-[0.15em] text-muted-foreground/60">
+              Humains compatibles
+            </p>
+            {MOCK_RESULTS.map((r, i) => (
+              <MatchCard key={r.id} match={r} delay={i * 80} />
+            ))}
+          </>
+        )}
       </section>
 
       {/* Assistant hints */}
