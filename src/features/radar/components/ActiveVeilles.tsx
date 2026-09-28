@@ -3,6 +3,7 @@ import { VEILLES } from "../data";
 import { SectionHeader } from "./SectionHeader";
 
 export function ActiveVeilles() {
+  if (VEILLES.length === 0) return null;
   return (
     <section className="space-y-2">
       <SectionHeader icon={BellRing} label="MES VEILLES" color="var(--radar)" action="Tout voir" />
