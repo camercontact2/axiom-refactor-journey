@@ -7,6 +7,7 @@ import { TrustBadge, LiveDot } from "@/components/ui-kit/TrustBadge";
 import { ArrowUpRight, Clock, Eye, Filter, MapPin, MessageCircle, ScanSearch, Search, Sparkles, TrendingUp, Zap } from "lucide-react";
 import { FILTERS, FEED, NEARBY, TRENDING, URGENT, SUGGESTIONS } from "@/features/scan/data";
 import { StatusBadge } from "@/features/scan/components/StatusBadge";
+import { EmptyGuide } from "@/components/ui-kit/EmptyGuide";
 
 export const Route = createFileRoute("/_authenticated/scan")({
   head: () => ({
@@ -124,7 +125,24 @@ function ScanPage() {
             <LiveDot label="Live" />
           </div>
 
-          {filtered.length === 0 ? (
+          {FEED.length === 0 ? (
+            <EmptyGuide
+              title="Votre zone se réveille"
+              description="Les annonces, services et besoins publiés près de vous apparaîtront ici en temps réel."
+              steps={[
+                "Complétez votre profil pour être visible et reconnu.",
+                "Publiez un Flash pour lancer la première offre de votre quartier.",
+                "Créez un besoin Radar : on vous prévient dès qu'une réponse arrive.",
+              ]}
+              actions={[
+                { label: "Publier un Flash", to: "/flash" },
+                { label: "Lancer un Radar", to: "/radar" },
+                { label: "Mon profil", to: "/profile" },
+              ]}
+              color="var(--scan)"
+              icon={<ScanSearch className="h-4 w-4" />}
+            />
+          ) : filtered.length === 0 ? (
             <SmartCard className="text-center">
               <p className="text-sm font-medium">Aucun résultat pour ce filtre</p>
               <p className="mt-1 text-xs text-muted-foreground">
@@ -184,6 +202,7 @@ function ScanPage() {
         </section>
 
         {/* NEARBY INTELLIGENCE */}
+        {NEARBY.length > 0 && (
         <section className="space-y-3">
           <div className="flex items-center justify-between px-1">
             <h2 className="text-sm font-medium text-muted-foreground">Autour de vous</h2>
@@ -212,8 +231,10 @@ function ScanPage() {
             </div>
           </div>
         </section>
+        )}
 
         {/* TRENDING */}
+        {TRENDING.length > 0 && (
         <section className="space-y-3">
           <h2 className="px-1 text-sm font-medium text-muted-foreground">En tendance</h2>
           <SmartCard className="divide-y divide-white/5 p-0">
@@ -239,8 +260,10 @@ function ScanPage() {
             ))}
           </SmartCard>
         </section>
+        )}
 
         {/* URGENT LAYER */}
+        {URGENT.length > 0 && (
         <section className="space-y-3">
           <div className="flex items-center justify-between px-1">
             <h2 className="text-sm font-medium" style={{ color: "var(--live)" }}>
@@ -281,6 +304,7 @@ function ScanPage() {
             </SmartCard>
           ))}
         </section>
+        )}
 
         {/* SMART SUGGESTIONS */}
         <section className="space-y-3">
