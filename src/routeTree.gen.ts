@@ -14,6 +14,7 @@ import { Route as MessagesRouteImport } from './routes/messages'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiDiscoveryRouteImport } from './routes/api/discovery'
 import { Route as ApiAssistantRouteImport } from './routes/api/assistant'
 import { Route as AuthenticatedTrustRouteImport } from './routes/_authenticated/trust'
 import { Route as AuthenticatedTalentsRouteImport } from './routes/_authenticated/talents'
@@ -46,6 +47,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDiscoveryRoute = ApiDiscoveryRouteImport.update({
+  id: '/api/discovery',
+  path: '/api/discovery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAssistantRoute = ApiAssistantRouteImport.update({
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/talents': typeof AuthenticatedTalentsRoute
   '/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
+  '/api/discovery': typeof ApiDiscoveryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -123,6 +130,7 @@ export interface FileRoutesByTo {
   '/talents': typeof AuthenticatedTalentsRoute
   '/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
+  '/api/discovery': typeof ApiDiscoveryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -140,6 +148,7 @@ export interface FileRoutesById {
   '/_authenticated/talents': typeof AuthenticatedTalentsRoute
   '/_authenticated/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
+  '/api/discovery': typeof ApiDiscoveryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/talents'
     | '/trust'
     | '/api/assistant'
+    | '/api/discovery'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/talents'
     | '/trust'
     | '/api/assistant'
+    | '/api/discovery'
   id:
     | '__root__'
     | '/'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/_authenticated/talents'
     | '/_authenticated/trust'
     | '/api/assistant'
+    | '/api/discovery'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   MessagesRoute: typeof MessagesRoute
   NotificationsRoute: typeof NotificationsRoute
   ApiAssistantRoute: typeof ApiAssistantRoute
+  ApiDiscoveryRoute: typeof ApiDiscoveryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -234,6 +247,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/discovery': {
+      id: '/api/discovery'
+      path: '/api/discovery'
+      fullPath: '/api/discovery'
+      preLoaderRoute: typeof ApiDiscoveryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/assistant': {
@@ -334,6 +354,7 @@ const rootRouteChildren: RootRouteChildren = {
   MessagesRoute: MessagesRoute,
   NotificationsRoute: NotificationsRoute,
   ApiAssistantRoute: ApiAssistantRoute,
+  ApiDiscoveryRoute: ApiDiscoveryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
