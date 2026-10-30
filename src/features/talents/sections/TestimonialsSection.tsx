@@ -2,6 +2,7 @@ import { SmartCard } from "@/components/ui-kit/SmartCard";
 import { TESTIMONIALS } from "../data";
 
 export function TestimonialsSection() {
+  if (TESTIMONIALS.length === 0) return null;
   return (
     <section className="space-y-3" aria-labelledby="voices-heading">
       <h3
