@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { SmartCard } from "@/components/ui-kit/SmartCard";
-import { DetailDialog } from "@/components/ui-kit/DetailDialog";
 import { Button } from "@/components/ui/button";
 import { Heart, ShieldCheck } from "lucide-react";
 import { ACCENT } from "../data";
@@ -29,41 +28,15 @@ export function PartagerSection() {
               T'as un truc à transmettre ? Lance-toi.
             </h3>
             <p className="text-xs leading-relaxed text-muted-foreground">
-              3 minutes chrono : un titre, deux lignes, tes dispos. On
-              s'occupe du reste et on t'accompagne pour tes premières
-              rencontres. Promis, ça fait pas mal.
+              Présentez votre savoir-faire dans votre profil : une courte
+              description et votre ville pour commencer.
             </p>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          <DetailDialog
-            accent={ACCENT}
-            eyebrow="Créer ma fiche"
-            title="Je crée ma fiche talent"
-            summary="On t'aide à présenter ton savoir-faire en une fiche claire, humaine et trouvable par les voisins."
-            steps={[
-              "Titre + 2 lignes pour dire ce que tu transmets.",
-              "Tes dispos (jours/heures) et ton coin.",
-              "Une photo, un prix libre — et c'est en ligne.",
-            ]}
-            meta={[
-              { label: "Temps", value: "≈ 3 minutes" },
-              { label: "Coût", value: "Gratuit" },
-              { label: "Modération", value: "Humaine" },
-              { label: "Visibilité", value: "Quartier d'abord" },
-            ]}
-            primaryCta={{ label: "Démarrer ma fiche" }}
-            secondaryCta={{ label: "Plus tard" }}
-            trigger={
-              <Button
-                size="sm"
-                className="w-full rounded-xl"
-                style={{ background: ACCENT, color: "var(--background)" }}
-              >
-                Je crée ma fiche talent
-              </Button>
-            }
-          />
+          <Button asChild size="sm" className="w-full rounded-md">
+            <Link to="/profile">Je crée ma fiche talent</Link>
+          </Button>
           <Button
             asChild
             size="sm"

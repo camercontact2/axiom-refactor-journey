@@ -4,6 +4,7 @@ import { DetailDialog } from "@/components/ui-kit/DetailDialog";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, BookOpen, Calendar, MapPin, MessageCircle, Star } from "lucide-react";
 import { ACCENT, FEATURED } from "../data";
+import { EmptyGuide } from "@/components/ui-kit/EmptyGuide";
 
 export function FeaturedSection() {
   return (
@@ -23,6 +24,24 @@ export function FeaturedSection() {
           Voir tout <ArrowUpRight className="h-3 w-3" />
         </Link>
       </div>
+      {FEATURED.length === 0 && (
+        <div className="space-y-3">
+          <EmptyGuide
+            title="Les premiers talents se font attendre"
+            description="Explorez les catégories ou décrivez votre besoin dans Radar pour découvrir un savoir-faire."
+            steps={[
+              "Choisissez un domaine qui vous intéresse.",
+              "Précisez votre recherche dans Radar.",
+              "Présentez votre propre savoir-faire sur votre fiche.",
+            ]}
+            color={ACCENT}
+          />
+          <div className="flex flex-wrap gap-2">
+            <Button asChild size="sm"><Link to="/radar">Découvrir avec Radar</Link></Button>
+            <Button asChild size="sm" variant="outline"><Link to="/talents" hash="partager">Créer ma fiche</Link></Button>
+          </div>
+        </div>
+      )}
       <div className="grid gap-3 sm:grid-cols-2">
         {FEATURED.map((f) => (
           <SmartCard
