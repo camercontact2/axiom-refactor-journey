@@ -8,7 +8,7 @@ import { ACCENT, LIVE_ITEMS } from "@/features/talents/data";
 import { HeroSection } from "@/features/talents/sections/HeroSection";
 import { PillarsSection } from "@/features/talents/sections/PillarsSection";
 import { CategoriesSection } from "@/features/talents/sections/CategoriesSection";
-import { FeaturedSection } from "@/features/talents/sections/FeaturedSection";
+import { PublishedTalents } from "@/features/talents/components/PublishedTalents";
 import { PartagerSection } from "@/features/talents/sections/PartagerSection";
 import { TestimonialsSection } from "@/features/talents/sections/TestimonialsSection";
 import { FooterNavSection } from "@/features/talents/sections/FooterNavSection";
@@ -61,7 +61,7 @@ function TalentsPage() {
         <HeroSection />
         <PillarsSection />
         <CategoriesSection />
-        <FeaturedSection />
+        <PublishedTalents />
         <PartagerSection />
         <TestimonialsSection />
         <FooterNavSection />

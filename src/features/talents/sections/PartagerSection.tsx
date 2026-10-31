@@ -28,14 +28,13 @@ export function PartagerSection() {
               T'as un truc à transmettre ? Lance-toi.
             </h3>
             <p className="text-xs leading-relaxed text-muted-foreground">
-              Présentez votre savoir-faire dans votre profil : une courte
-              description et votre ville pour commencer.
+              Une photo, votre voix ou quelques mots : partagez votre savoir-faire.
             </p>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           <Button asChild size="sm" className="w-full rounded-md">
-            <Link to="/profile">Je crée ma fiche talent</Link>
+            <Link to="/talents/creer">Je crée ma fiche talent</Link>
           </Button>
           <Button
             asChild

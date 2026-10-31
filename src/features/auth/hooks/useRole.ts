@@ -16,10 +16,11 @@ export function useRoles() {
     queryKey: ["roles", user?.id ?? "anonymous"],
     enabled: Boolean(user?.id),
     queryFn: async (): Promise<AppRole[]> => {
+      if (!user) return [];
       const { data, error } = await supabase
         .from("user_roles")
         .select("role")
-        .eq("user_id", user!.id);
+        .eq("user_id", user.id);
       if (error) throw error;
       return (data ?? []).map((r) => r.role as AppRole);
     },

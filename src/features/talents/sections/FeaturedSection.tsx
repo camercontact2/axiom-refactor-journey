@@ -38,7 +38,7 @@ export function FeaturedSection() {
           />
           <div className="flex flex-wrap gap-2">
             <Button asChild size="sm"><Link to="/radar">Découvrir avec Radar</Link></Button>
-            <Button asChild size="sm" variant="outline"><Link to="/talents" hash="partager">Créer ma fiche</Link></Button>
+            <Button asChild size="sm" variant="outline"><Link to="/talents/creer">Créer ma fiche</Link></Button>
           </div>
         </div>
       )}

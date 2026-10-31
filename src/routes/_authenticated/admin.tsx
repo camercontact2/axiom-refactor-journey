@@ -7,15 +7,17 @@ import { ShieldCheck } from "lucide-react";
 import { useRoles } from "@/features/auth/hooks/useRole";
 import { AdminAccounts } from "@/features/admin/sections/AdminAccounts";
 import { AdminFlashModeration } from "@/features/admin/sections/AdminFlashModeration";
+import { AdminTalentModeration } from "@/features/admin/sections/AdminTalentModeration";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({
     meta: [
       { title: "Administration — VITALA" },
-      { name: "description", content: "Espace d'administration VITALA : comptes, profils et modération des Flash." },
+      { name: "description", content: "Espace d'administration VITALA : comptes, profils, modération des Flash et talents." },
       { name: "robots", content: "noindex" },
       { property: "og:title", content: "Administration — VITALA" },
-      { property: "og:description", content: "Gestion des comptes et modération des Flash VITALA." },
+      { property: "og:description", content: "Gestion des comptes et modération des Flash et talents VITALA." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -23,11 +25,11 @@ export const Route = createFileRoute("/_authenticated/admin")({
   component: AdminPage,
 });
 
-type Tab = "accounts" | "flash";
+type Tab = "accounts" | "flash" | "talents";
 
 function AdminPage() {
   const { isAdmin, isModerator, loading } = useRoles();
-  const [tab, setTab] = useState<Tab>("accounts");
+  const [tab, setTab] = useState<Tab>("talents");
 
   if (loading) {
     return (
@@ -61,15 +63,15 @@ function AdminPage() {
           icon={<ShieldCheck className="h-5 w-5" aria-hidden="true" />}
         />
 
-        <div className="flex gap-2" role="tablist" aria-label="Sections d'administration">
+        <div className="flex flex-wrap gap-2" aria-label="Sections d'administration">
           {([
             { id: "accounts", label: "Comptes & profils" },
             { id: "flash", label: "Modération Flash" },
+            { id: "talents", label: "Modération Talents" },
           ] as const).map((t) => (
-            <button
+            <Button
               key={t.id}
-              role="tab"
-              aria-selected={tab === t.id}
+              aria-pressed={tab === t.id}
               onClick={() => setTab(t.id)}
               className={
                 "rounded-full px-3.5 py-1.5 text-sm transition-colors " +
@@ -79,11 +81,11 @@ function AdminPage() {
               }
             >
               {t.label}
-            </button>
+            </Button>
           ))}
         </div>
 
-        {tab === "accounts" ? <AdminAccounts /> : <AdminFlashModeration />}
+        {tab === "accounts" ? <AdminAccounts /> : tab === "flash" ? <AdminFlashModeration /> : <AdminTalentModeration />}
       </div>
     </AppShell>
   );
