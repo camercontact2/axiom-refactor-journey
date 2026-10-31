@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/features/auth/hooks/useAuth';
 import { type Talent, type TalentFiles, type TalentValues, validateMedia, validatePublication, talentSchema } from '../model';
 
 // Replace this transitional untyped client with regenerated table types after the pending schema is applied.
@@ -8,21 +9,24 @@ const db: SupabaseClient = supabase;
 const bucket = 'talent-media';
 const unavailable = 'L’enregistrement des talents est indisponible pour le moment. Votre fiche reste ouverte ; ne quittez pas cette page.';
 export function useTalent(id: string | undefined) {
-  return useQuery({ queryKey: ['talent', id], enabled: Boolean(id), queryFn: async () => {
+  const { user } = useAuth();
+  return useQuery({ queryKey: ['talent', user?.id, id], enabled: Boolean(id && user), queryFn: async () => {
     const { data, error } = await db.from('talent_profiles').select('*').eq('id', id).maybeSingle();
     if (error) throw new Error('Cette fiche est momentanément indisponible.');
     return data as Talent | null;
   } });
 }
 export function usePublishedTalents() {
-  return useQuery({ queryKey: ['talents', 'published'], queryFn: async () => {
-    const { data, error } = await db.from('talent_profiles').select('*').eq('status', 'published').order('created_at', { ascending: false }).limit(30);
+  const { user } = useAuth();
+  return useQuery({ queryKey: ['talents', user?.id, 'published'], enabled: Boolean(user), queryFn: async () => {
+    const { data, error } = await db.from('talent_profiles').select('*').eq('status', 'published').eq('moderation_status', 'approved').order('created_at', { ascending: false }).limit(30);
     if (error) throw new Error('Les fiches talents ne sont pas encore disponibles.');
     return (data ?? []) as Talent[];
   } });
 }
 export function useTalentMedia(path: string | null | undefined) {
-  return useQuery({ queryKey: ['talent-media', path], enabled: Boolean(path), staleTime: 0, gcTime: 0, queryFn: async () => {
+  const { user } = useAuth();
+  return useQuery({ queryKey: ['talent-media', user?.id, path], enabled: Boolean(path && user), staleTime: 240000, gcTime: 0, queryFn: async () => {
     if (!path) return null;
     const { data, error } = await db.storage.from(bucket).createSignedUrl(path, 300);
     if (error) throw new Error('Ce fichier n’est pas accessible.');
@@ -59,7 +63,23 @@ export function useSaveTalent() {
       throw error;
     }
   }, onSuccess: talent => {
-    cache.setQueryData(['talent', talent.id], talent);
+    cache.setQueryData(['talent', talent.owner_id, talent.id], talent);
     void cache.invalidateQueries({ queryKey: ['talents'] });
   } });
+}
+
+export function useTalentsForModeration() {
+  const { user } = useAuth();
+  return useQuery({ queryKey: ['talents', user?.id, 'moderation'], enabled: Boolean(user), queryFn: async () => {
+    const { data, error } = await db.from('talent_profiles').select('*').eq('status', 'published').order('created_at', { ascending: false }).limit(100);
+    if (error) throw new Error('La modération des talents est momentanément indisponible.');
+    return (data ?? []) as Talent[];
+  } });
+}
+export function useModerateTalent() {
+  const cache = useQueryClient();
+  return useMutation({ mutationFn: async ({ id, decision, reason }: { id: string; decision: 'approved' | 'rejected'; reason?: string }) => {
+    const { error } = await db.from('talent_profiles').update({ moderation_status: decision, moderation_reason: decision === 'rejected' ? reason : null }).eq('id', id).select('id').single();
+    if (error) throw new Error('La décision n’a pas été enregistrée.');
+  }, onSuccess: () => { void cache.invalidateQueries({ queryKey: ['talents'] }); void cache.invalidateQueries({ queryKey: ['talent'] }); } });
 }
