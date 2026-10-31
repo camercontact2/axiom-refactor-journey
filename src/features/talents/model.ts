@@ -9,10 +9,9 @@ export const talentSchema = z.object({
   categories: z.array(z.enum(TALENT_CATEGORIES)).min(1, 'Choisissez une catégorie.').max(8),
   skills: z.array(z.string().trim().min(1).max(100)).max(30),
   experience: z.string().max(5000),
-  links: z.array(z.string().url('Indiquez un lien complet : https://…').refine(value => /^https?:\/\//i.test(value), 'Utilisez un lien https://…')).max(10),
 });
 export type TalentValues = z.infer<typeof talentSchema>;
-export type Talent = TalentValues & { id: string; owner_id: string; status: 'draft' | 'published'; photo_path: string | null; audio_path: string | null; cv_path: string | null; created_at: string };
+export type Talent = TalentValues & { id: string; owner_id: string; status: 'draft' | 'published'; moderation_status: 'pending' | 'approved' | 'rejected'; moderation_reason: string | null; photo_path: string | null; audio_path: string | null; cv_path: string | null; created_at: string };
 export type MediaKind = 'photo' | 'audio' | 'cv';
 export type TalentFiles = Partial<Record<MediaKind, File>>;
 export const blankTalent: TalentValues = { name: '', bio: '', categories: [], skills: [], experience: '', links: [] };
