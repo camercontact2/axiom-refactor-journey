@@ -24,6 +24,9 @@ import { Route as AuthenticatedTalentsRouteImport } from './routes/_authenticate
 import { Route as AuthenticatedTrustRouteImport } from './routes/_authenticated/trust'
 import { Route as ApiAssistantRouteImport } from './routes/api/assistant'
 import { Route as ApiDiscoveryRouteImport } from './routes/api/discovery'
+import { Route as AuthenticatedTalentsCreerRouteImport } from './routes/_authenticated/talents_.creer'
+import { Route as AuthenticatedTalentsFicheTalentIdRouteImport } from './routes/_authenticated/talents_.fiche.$talentId'
+import { Route as AuthenticatedTalentsFicheTalentIdModifierRouteImport } from './routes/_authenticated/talents_.fiche.$talentId_.modifier'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -99,6 +102,24 @@ const ApiDiscoveryRoute = ApiDiscoveryRouteImport.update({
   path: '/api/discovery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedTalentsCreerRoute =
+  AuthenticatedTalentsCreerRouteImport.update({
+    id: '/talents_/creer',
+    path: '/talents/creer',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTalentsFicheTalentIdRoute =
+  AuthenticatedTalentsFicheTalentIdRouteImport.update({
+    id: '/talents_/fiche/$talentId',
+    path: '/talents/fiche/$talentId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedTalentsFicheTalentIdModifierRoute =
+  AuthenticatedTalentsFicheTalentIdModifierRouteImport.update({
+    id: '/talents_/fiche/$talentId_/modifier',
+    path: '/talents/fiche/$talentId/modifier',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -115,6 +136,9 @@ export interface FileRoutesByFullPath {
   '/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
   '/api/discovery': typeof ApiDiscoveryRoute
+  '/talents/creer': typeof AuthenticatedTalentsCreerRoute
+  '/talents/fiche/$talentId': typeof AuthenticatedTalentsFicheTalentIdRoute
+  '/talents/fiche/$talentId/modifier': typeof AuthenticatedTalentsFicheTalentIdModifierRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -131,6 +155,9 @@ export interface FileRoutesByTo {
   '/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
   '/api/discovery': typeof ApiDiscoveryRoute
+  '/talents/creer': typeof AuthenticatedTalentsCreerRoute
+  '/talents/fiche/$talentId': typeof AuthenticatedTalentsFicheTalentIdRoute
+  '/talents/fiche/$talentId/modifier': typeof AuthenticatedTalentsFicheTalentIdModifierRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -149,6 +176,9 @@ export interface FileRoutesById {
   '/_authenticated/trust': typeof AuthenticatedTrustRoute
   '/api/assistant': typeof ApiAssistantRoute
   '/api/discovery': typeof ApiDiscoveryRoute
+  '/_authenticated/talents_/creer': typeof AuthenticatedTalentsCreerRoute
+  '/_authenticated/talents_/fiche/$talentId': typeof AuthenticatedTalentsFicheTalentIdRoute
+  '/_authenticated/talents_/fiche/$talentId_/modifier': typeof AuthenticatedTalentsFicheTalentIdModifierRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -167,6 +197,9 @@ export interface FileRouteTypes {
     | '/trust'
     | '/api/assistant'
     | '/api/discovery'
+    | '/talents/creer'
+    | '/talents/fiche/$talentId'
+    | '/talents/fiche/$talentId/modifier'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -183,6 +216,9 @@ export interface FileRouteTypes {
     | '/trust'
     | '/api/assistant'
     | '/api/discovery'
+    | '/talents/creer'
+    | '/talents/fiche/$talentId'
+    | '/talents/fiche/$talentId/modifier'
   id:
     | '__root__'
     | '/'
@@ -200,6 +236,9 @@ export interface FileRouteTypes {
     | '/_authenticated/trust'
     | '/api/assistant'
     | '/api/discovery'
+    | '/_authenticated/talents_/creer'
+    | '/_authenticated/talents_/fiche/$talentId'
+    | '/_authenticated/talents_/fiche/$talentId_/modifier'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -319,6 +358,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiDiscoveryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/talents_/creer': {
+      id: '/_authenticated/talents_/creer'
+      path: '/talents/creer'
+      fullPath: '/talents/creer'
+      preLoaderRoute: typeof AuthenticatedTalentsCreerRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/talents_/fiche/$talentId': {
+      id: '/_authenticated/talents_/fiche/$talentId'
+      path: '/talents/fiche/$talentId'
+      fullPath: '/talents/fiche/$talentId'
+      preLoaderRoute: typeof AuthenticatedTalentsFicheTalentIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/talents_/fiche/$talentId_/modifier': {
+      id: '/_authenticated/talents_/fiche/$talentId_/modifier'
+      path: '/talents/fiche/$talentId/modifier'
+      fullPath: '/talents/fiche/$talentId/modifier'
+      preLoaderRoute: typeof AuthenticatedTalentsFicheTalentIdModifierRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -331,6 +391,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedScanRoute: typeof AuthenticatedScanRoute
   AuthenticatedTalentsRoute: typeof AuthenticatedTalentsRoute
   AuthenticatedTrustRoute: typeof AuthenticatedTrustRoute
+  AuthenticatedTalentsCreerRoute: typeof AuthenticatedTalentsCreerRoute
+  AuthenticatedTalentsFicheTalentIdRoute: typeof AuthenticatedTalentsFicheTalentIdRoute
+  AuthenticatedTalentsFicheTalentIdModifierRoute: typeof AuthenticatedTalentsFicheTalentIdModifierRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -342,6 +405,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedScanRoute: AuthenticatedScanRoute,
   AuthenticatedTalentsRoute: AuthenticatedTalentsRoute,
   AuthenticatedTrustRoute: AuthenticatedTrustRoute,
+  AuthenticatedTalentsCreerRoute: AuthenticatedTalentsCreerRoute,
+  AuthenticatedTalentsFicheTalentIdRoute:
+    AuthenticatedTalentsFicheTalentIdRoute,
+  AuthenticatedTalentsFicheTalentIdModifierRoute:
+    AuthenticatedTalentsFicheTalentIdModifierRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
