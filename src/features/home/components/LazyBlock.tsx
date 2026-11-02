@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useMemo, useRef, useState, type ComponentType } from "react";
+import { Suspense, lazy, useEffect, useState, useRef, type ComponentType } from "react";
 
 interface LazyBlockProps {
   /** Import dynamique du bloc, ex: () => import("./HowItWorks").then(m => ({ default: m.HowItWorks })) */
@@ -12,12 +12,13 @@ interface LazyBlockProps {
 /**
  * Charge (code + rendu) un bloc de la page d'accueil uniquement quand il
  * approche du viewport. Les blocs hors ecran ne sont pas telecharges au
- * premier rendu.
+ * premier rendu. Le type lazy reste stable pendant toute la durée de vie du bloc
+ * pour éviter de remonter son arbre si le parent rerend.
  */
 export function LazyBlock({ load, minHeight = 180, label }: LazyBlockProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
-  const Comp = useMemo(() => (visible ? lazy(load) : null), [visible, load]);
+  const [LazyComponent] = useState(() => lazy(load));
 
   useEffect(() => {
     if (visible) return;
@@ -34,7 +35,7 @@ export function LazyBlock({ load, minHeight = 180, label }: LazyBlockProps) {
           io.disconnect();
         }
       },
-      { rootMargin: "300px 0px" }
+      { rootMargin: "300px 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -42,7 +43,7 @@ export function LazyBlock({ load, minHeight = 180, label }: LazyBlockProps) {
 
   return (
     <div ref={ref}>
-      {Comp ? (
+      {visible ? (
         <Suspense
           fallback={
             <div
@@ -53,7 +54,7 @@ export function LazyBlock({ load, minHeight = 180, label }: LazyBlockProps) {
             />
           }
         >
-          <Comp />
+          <LazyComponent />
         </Suspense>
       ) : (
         <div
