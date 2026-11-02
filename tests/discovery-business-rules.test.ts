@@ -28,7 +28,7 @@ describe("discovery business rules", () => {
     ]);
   });
 
-  it("ranks matches by overlap with the user query", () => {
+  it("ranks matches by overlap with the user query and excludes zero-score matches", () => {
     const query = "plombier rapide Yaoundé réparation";
     const matches = [
       {
@@ -56,21 +56,37 @@ describe("discovery business rules", () => {
 
     const ranked = rankMatches(query, matches);
 
-    expect(ranked.map((match) => match.id)).toEqual(["m-1", "m-3", "m-2"]);
-    expect(ranked).toHaveLength(3);
+    expect(ranked.map((match) => match.id)).toEqual(["m-1", "m-3"]);
   });
 
-  it("drops matches with zero score", () => {
-    const matches = [
+  it("drops malformed records and unknown fields at the runtime boundary", () => {
+    const candidates = [
       {
-        id: "no-match",
-        kind: "flash" as const,
-        title: "Photographe",
-        description: "Prises de vue pour événements",
+        id: "valid",
+        kind: "flash",
+        title: "Plombier",
+        description: "Intervention plomberie",
         city: "Douala",
+      },
+      {
+        id: "invalid-extra-field",
+        kind: "profile",
+        title: "Plombier",
+        description: "Intervention plomberie",
+        city: "Douala",
+        privateEmail: "private@example.test",
+      },
+      {
+        id: "invalid-shape",
+        kind: "flash",
+        title: "",
+        description: "Intervention plomberie",
+        city: null,
       },
     ];
 
-    expect(rankMatches("plombier urgence yaounde", matches)).toEqual([]);
+    expect(rankMatches("plombier intervention", candidates).map((match) => match.id)).toEqual([
+      "valid",
+    ]);
   });
 });
