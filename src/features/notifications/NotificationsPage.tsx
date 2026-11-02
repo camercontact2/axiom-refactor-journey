@@ -4,18 +4,18 @@ import { EmptyState } from "@/features/notifications/components/EmptyState";
 import { NotificationGroup } from "@/features/notifications/components/NotificationGroup";
 import { CONTEXT_META, HubContext, NOTIFICATIONS, Notification } from "@/lib/notifications";
 
+const FILTERS: Array<{ id: "all" | HubContext; label: string }> = [
+  { id: "all", label: "Toutes" },
+  { id: "flash", label: "Flash" },
+  { id: "radar", label: "Radar" },
+  { id: "scan", label: "Scan" },
+  { id: "trust", label: "Trust" },
+  { id: "message", label: "Messages" },
+];
+
 export function NotificationsPage() {
   const [filter, setFilter] = useState<"all" | HubContext>("all");
   const [dismissed, setDismissed] = useState<Set<string>>(new Set());
-
-  const FILTERS: Array<{ id: "all" | HubContext; label: string }> = [
-    { id: "all", label: "Toutes" },
-    { id: "flash", label: "Flash" },
-    { id: "radar", label: "Radar" },
-    { id: "scan", label: "Scan" },
-    { id: "trust", label: "Trust" },
-    { id: "message", label: "Messages" },
-  ];
 
   const filtered = useMemo(() => {
     return NOTIFICATIONS.filter((n) => {
